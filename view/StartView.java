@@ -1,8 +1,10 @@
 package view;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import view.MainView;
 
 public class StartView extends JFrame {
     
@@ -22,8 +24,27 @@ public class StartView extends JFrame {
         startBtn.setBounds(((mainView.getWidth() / 2 ) - btnWidth + 80), ((mainView.getHeight() / 2 ) - btnHeight), btnWidth, btnHeight);
         highScoreBtn.setBounds(((mainView.getWidth() / 2 ) - btnWidth + 80), ((mainView.getHeight() / 2 ) - btnHeight + (btnHeight * 2)), btnWidth, btnHeight);
 
-        mainView.add(startBtn);
-        mainView.add(highScoreBtn);
+        startBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                System.out.println("Start clicked");
+                mainView.clearWindow();
+            }
+        });
+
+        highScoreBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                System.out.println("highscore clicked");
+                mainView.clearWindow();
+            }
+        });
+
+
+        mainView.getWindowDrawSpace().add(startBtn);
+        mainView.getWindowDrawSpace().add(highScoreBtn);
+
+        
         
     }
 
