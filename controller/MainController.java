@@ -6,6 +6,6 @@ public class MainController {
     private MainView view;
     
     public MainController(){
-        view = new MainView();
+        view = new MainView(1000,500);
     }
 }
