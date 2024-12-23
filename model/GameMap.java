@@ -12,15 +12,15 @@ public class GameMap {
         Position[][] gameMap1 = 
         {
             {new Neutral(), new Neutral(), new Neutral(), new Trap(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Surprise(), new Neutral()},
-            {new Treasure(0), new Treasure(0), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral()},
-            {new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Treasure(1), new Neutral(), new Treasure(2), new Neutral()},
-            {new Surprise(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Treasure(1), new Neutral(), new Treasure(2), new Treasure(2)},
-            {new Neutral(), new Treasure(3), new Treasure(3), new Treasure(3), new Neutral(), new Neutral(), new Treasure(1), new Neutral(), new Trap(), new Treasure(2)},
-            {new Neutral(), new Neutral(), new Treasure(3), new Trap(), new Neutral(), new Neutral(), new Surprise(), new Neutral(), new Neutral(), new Neutral()},
-            {new Neutral(), new Neutral(), new Neutral(),new Neutral(), new Neutral(), new Neutral(),new Neutral(), new Neutral(), new Treasure(4), new Treasure(4)},
-            {new Neutral(), new Neutral(), new Neutral(),new Neutral(), new Neutral(), new Neutral(),new Neutral(), new Neutral(), new Treasure(4), new Treasure(4)},
-            {new Treasure(6), new Neutral(), new Neutral(), new Neutral(), new Trap(), new Neutral(), new Neutral(), new Treasure(5), new Neutral(), new Neutral()},
-            {new Treasure(6), new Neutral(), new Surprise(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral()}
+            {new Treasure(0, 2), new Treasure(0, 2), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral()},
+            {new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Treasure(1, 3), new Neutral(), new Treasure(2, 4), new Neutral()},
+            {new Surprise(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Treasure(1, 3), new Neutral(), new Treasure(2, 4), new Treasure(2, 4)},
+            {new Neutral(), new Treasure(3, 4), new Treasure(3, 4), new Treasure(3, 4), new Neutral(), new Neutral(), new Treasure(1, 3), new Neutral(), new Trap(), new Treasure(2, 4)},
+            {new Neutral(), new Neutral(), new Treasure(3, 4), new Trap(), new Neutral(), new Neutral(), new Surprise(), new Neutral(), new Neutral(), new Neutral()},
+            {new Neutral(), new Neutral(), new Neutral(),new Neutral(), new Neutral(), new Neutral(),new Neutral(), new Neutral(), new Treasure(4, 4), new Treasure(4, 4)},
+            {new Neutral(), new Neutral(), new Neutral(),new Neutral(), new Neutral(), new Neutral(),new Neutral(), new Neutral(), new Treasure(4, 4), new Treasure(4, 4)},
+            {new Treasure(6, 2), new Neutral(), new Neutral(), new Neutral(), new Trap(), new Neutral(), new Neutral(), new Treasure(5, 1), new Neutral(), new Neutral()},
+            {new Treasure(6, 2), new Neutral(), new Surprise(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral()}
         };
 
         //TODO: Gör en till map + randomisera
