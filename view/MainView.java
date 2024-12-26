@@ -11,6 +11,11 @@ public class MainView extends JFrame {
     private int windowWidth;
     private int windowHeight;
 
+    private GameMapView gameMapView;
+    private EventView eventView;
+    private PlayerView playerView;
+    private StartView startView;
+
     public MainView(int windowWidth, int windowHeight){       
         super("Game");
         this.setWindowWidth(windowWidth);
@@ -29,6 +34,13 @@ public class MainView extends JFrame {
 
         this.add(windowDrawSpace);
         new StartView(this).createStartView();
+    }
+
+    public void createGameView(){
+        gameMapView = new GameMapView(this);
+        playerView = new PlayerView(this);
+        eventView = new EventView(this);
+        startView = new StartView(this);
     }
 
     public void clearWindow(){

@@ -30,7 +30,7 @@ public class StartView extends JFrame {
             public void actionPerformed(ActionEvent e){
                 System.out.println("Start clicked");
                 mainView.clearWindow();
-                GameMapView gameMapView = new GameMapView(mainView);
+                mainView.createGameView();
             }
         });
 

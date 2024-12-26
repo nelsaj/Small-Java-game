@@ -6,6 +6,7 @@ import view.EventView;
 import view.GameMapView;
 
 public class GameMapController {
+
     GameMapView gameMapView;
     EventView eventView;
 
