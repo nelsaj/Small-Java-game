@@ -1,5 +1,5 @@
 package view;
 
-public class EventView {
-    
+public class EventView implements MessageViewsInterface {
+    public void showMessage (String message) {};
 }

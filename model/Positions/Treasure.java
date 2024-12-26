@@ -21,7 +21,4 @@ public class Treasure extends Position {
         return size;
     }
 
-    public void digEvent () {
-        hasBeenDigged = true;
-    }
 }

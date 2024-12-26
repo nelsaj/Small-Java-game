@@ -6,7 +6,8 @@ public class Player {
     private int playerNbr;
 
     Player(int playerNbr) {
-
+        setLives(3); setScore(0);
+        setPlayerNbr(playerNbr);
     }
 
     public void setLives(int lives) {
@@ -26,5 +27,14 @@ public class Player {
     }
     public int getPlayerNbr() {
         return playerNbr;
+    }
+
+    public void removePoints (int points) {
+        if (points > this.score) setScore(0);
+        else setScore(this.score - points);
+    }
+    public void removeLives (int lives) {
+        if (lives > this.lives) setLives(0);
+        else setLives(this.lives - lives);
     }
 }
