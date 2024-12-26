@@ -1,7 +1,7 @@
 package model.Positions;
 
-public abstract class Position {
+public class Position {
     protected boolean hasBeenDigged;
 
-    public abstract void digEvent();
+    public void digEvent() {hasBeenDigged = true;}
 }
