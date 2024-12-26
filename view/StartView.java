@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import view.GameMapView;
 
 public class StartView extends JFrame {
     
@@ -29,6 +30,7 @@ public class StartView extends JFrame {
             public void actionPerformed(ActionEvent e){
                 System.out.println("Start clicked");
                 mainView.clearWindow();
+                GameMapView gameMapView = new GameMapView(mainView);
             }
         });
 
