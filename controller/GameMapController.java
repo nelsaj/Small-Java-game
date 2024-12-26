@@ -8,9 +8,7 @@ import view.GameMapView;
 import view.MainView;
 
 public class GameMapController {
-
-    GameMapView gameMapView;
-    EventView eventView;
+    MainView mainView;
 
     GameMapController(MainView mainView) {
         // gameMapView = new GameMapView();

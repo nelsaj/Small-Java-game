@@ -43,6 +43,8 @@ public class MainView extends JFrame {
         startView = new StartView(this);
     }
 
+    public void eventMessage(String message) {eventView.showMessage(message);}
+
     public void clearWindow(){
         this.getWindowDrawSpace().removeAll();
         this.getWindowDrawSpace().revalidate();
@@ -63,4 +65,6 @@ public class MainView extends JFrame {
     public JPanel getWindowDrawSpace() {
         return windowDrawSpace;
     }
+
+    
 }
