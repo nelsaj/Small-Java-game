@@ -1,5 +1,6 @@
 package controller;
 
+import model.GameMap;
 import model.Player;
 import model.Positions.Position;
 import model.Positions.Treasure;
@@ -9,11 +10,17 @@ import view.MainView;
 
 public class GameMapController {
     MainView mainView;
+    GameMap gameMap;
 
     GameMapController(MainView mainView) {
         // gameMapView = new GameMapView();
         // eventView = new EventView();
+        this.gameMap = new GameMap();
         this.mainView = mainView;
+    }
+
+    public Position[][] generateMap () {
+        return gameMap.generateMap();
     }
 
     //TODO: View o event + switch?

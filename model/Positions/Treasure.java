@@ -21,4 +21,8 @@ public class Treasure extends Position {
         return size;
     }
 
+    @Override
+    public String toString() {
+        return "S";
+    }
 }

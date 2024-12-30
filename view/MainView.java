@@ -3,9 +3,11 @@ package view;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controller.MainController;
 import view.StartView;
 
 public class MainView extends JFrame {
+    private MainController controller;
     
     private JPanel windowDrawSpace;
     private int windowWidth;
@@ -16,24 +18,26 @@ public class MainView extends JFrame {
     private PlayerView playerView;
     private StartView startView;
 
-    public MainView(int windowWidth, int windowHeight){       
+    public MainView(int windowWidth, int windowHeight, MainController controller){      
         super("Game");
         this.setWindowWidth(windowWidth);
         this.setWindowHeight(windowHeight);
-
+        
         this.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
         this.setSize(getWindowWidth(),getWindowHeight());
         this.setVisible(true);
         this.setResizable(false);
         this.setLayout(null);
-
+        
         windowDrawSpace = new JPanel();
         windowDrawSpace.setSize(getWindowWidth(), getWindowHeight());
         windowDrawSpace.setVisible(true);
         windowDrawSpace.setLayout(null);
-
+        
         this.add(windowDrawSpace);
         new StartView(this).createStartView();
+        
+        this.controller = controller;       
     }
 
     public void createGameView(){
@@ -44,6 +48,14 @@ public class MainView extends JFrame {
     }
 
     public void eventMessage(String message) {eventView.showMessage(message);}
+
+    public void buttonPressed (int[] pos) {
+        controller.buttonPressed(pos);
+    }
+    //letter temporary
+    public void changeButton (int[] pos, String letter) {
+        gameMapView.changeButton(pos, letter);
+    }
 
     public void clearWindow(){
         this.getWindowDrawSpace().removeAll();
