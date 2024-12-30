@@ -3,6 +3,7 @@ package view;
 import java.awt.Event;
 import java.awt.Font;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -18,7 +19,15 @@ public class EventView implements MessageViewsInterface {
     public void showMessage (String message) {};
 
     public void createEventViewGUI(){
-        JList eventListGUI = new JList<>();
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        
+        listModel.addElement("test 1");
+        listModel.addElement("test 2");
+        listModel.addElement("test 3");
+        listModel.addElement("test 4");
+
+        JList eventListGUI = new JList<>(listModel);
+        
         JLabel eventListGUILabel = new JLabel("Event list");
         eventListGUILabel.setBounds(550, 0, 100, 50); 
         eventListGUILabel.setFont(new Font("serif", Font.PLAIN, 18));
