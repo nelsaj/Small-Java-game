@@ -5,9 +5,9 @@ public class Player {
     private int score;
     private int playerNbr;
 
-    Player(int playerNbr) {
+    public Player(int playerNbr) {
         setLives(3); setScore(0);
-        setPlayerNbr(playerNbr);
+        setPlayerNbr(playerNbr); 
     }
 
     public void setLives(int lives) {

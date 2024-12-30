@@ -1,8 +1,11 @@
 package controller;
 
+import java.util.Random;
+
 import model.GameMap;
 import model.Player;
 import model.Positions.Position;
+import model.Positions.Trap;
 import model.Positions.Treasure;
 import view.EventView;
 import view.GameMapView;
@@ -13,8 +16,6 @@ public class GameMapController {
     GameMap gameMap;
 
     GameMapController(MainView mainView) {
-        // gameMapView = new GameMapView();
-        // eventView = new EventView();
         this.gameMap = new GameMap();
         this.mainView = mainView;
     }
@@ -23,24 +24,43 @@ public class GameMapController {
         return gameMap.generateMap();
     }
 
-    //TODO: View o event + switch?
-    public void trap1 (Player player) {
-        final int removerPoints = 1;
-        player.removePoints(removerPoints);
-
-        mainView.eventMessage("Player "+player.getPlayerNbr()+" lost "+removerPoints+" points.");
-    } 
-    public void trap2 (Player pointTaker, Player pointGiver) {
-        int points = pointGiver.getScore() / 3; 
-        pointGiver.removePoints(points); 
-        pointTaker.setScore(pointTaker.getScore() + points); 
-        
-        mainView.eventMessage("Player "+pointTaker.getPlayerNbr()+" recieved "+points+" points from player "+pointGiver.getPlayerNbr()+".");
+    //vet inte om den är bäst här
+    public void digEvent (Position gameSpace, Player currentPlayer, Player opponentPlayer) {
+        if (gameSpace instanceof Trap) 
+            activateTrap(currentPlayer, opponentPlayer);
     }
-    public void trap3 (Player player) {
-        player.removeLives(1);
+
+    public void activateTrap(Player currentPlayer, Player opponentPlayer) {
+        int randomIndex = new Random().nextInt(3);
+
+        switch (randomIndex) {
+            // remove points
+            case 0:
+                final int removerPoints = 1;
+                currentPlayer.removePoints(removerPoints);
+    
+                mainView.eventMessage("Player "+currentPlayer.getPlayerNbr()+" lost "+removerPoints+" points.");
+                break;
+            
+                //give points
+            case 1:
+                int points = currentPlayer.getScore() / 3; 
+                currentPlayer.removePoints(points); 
+                opponentPlayer.setScore(currentPlayer.getScore() + points); 
+            
+                mainView.eventMessage("Player "+opponentPlayer.getPlayerNbr()+" recieved "+points+" points from player "+currentPlayer.getPlayerNbr()+".");
+                break;
+
+            // remove life
+            case 2:
+                currentPlayer.removeLives(1);
         
-        mainView.eventMessage("Player "+player.getPlayerNbr()+" lost 1 life.");
+                mainView.eventMessage("Player "+currentPlayer.getPlayerNbr()+" lost 1 life.");
+                break;
+        
+            default:
+                break;
+        }
     }
     
     
