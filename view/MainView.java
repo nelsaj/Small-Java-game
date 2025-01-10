@@ -56,6 +56,12 @@ public class MainView extends JFrame {
     public void changeButton (int[] pos, String letter) {
         gameMapView.changeButton(pos, letter);
     }
+    public void changePoints(int whichPlayer, String newPoints){
+        playerView.changePointGUI(whichPlayer, newPoints);
+    }
+    public void changeCurrTurn(int currPlayer) {
+        playerView.displayCurrTurn(currPlayer);
+    }
 
     public void clearWindow(){
         this.getWindowDrawSpace().removeAll();

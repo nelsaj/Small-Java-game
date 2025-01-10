@@ -16,7 +16,8 @@ public class Player {
     public int getLives() {
         return lives;
     }
-    public void setScore(int score) {
+    //PRIVATE
+    private void setScore(int score) {
         this.score = score;
     }
     public int getScore() {
@@ -27,6 +28,10 @@ public class Player {
     }
     public int getPlayerNbr() {
         return playerNbr;
+    }
+
+    public void addPoints (int points) {
+        setScore(score+points);
     }
 
     public void removePoints (int points) {

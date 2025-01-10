@@ -1,18 +1,75 @@
 package model.Positions;
 
 public class TreasureShape {
-    private Treasure[][] shape;
+    private int treasureID;
+    private int size;
+    private int spacesDug;
 
-    TreasureShape(Treasure[][] shapeInfo) {
-        setShape(shapeInfo);
+    private static final int[][][] allowedShapes = 
+    {
+        {{1, 0, 0},
+        {0, 0 , 0},
+        {0, 0, 0}},
+
+        {{1, 1, 0},
+        {0, 0, 0},
+        {0, 0, 0}},
+
+        {{1, 1, 1},
+        {0, 0, 0},
+        {0, 0, 0}},
+
+        {{1, 1, 0},
+        {0, 1, 0},
+        {0, 0, 0}},
+
+        {{1, 1, 1},
+        {0, 1, 0},
+        {0, 0, 0}},
+
+        {{1, 1, 0},
+        {1, 1, 0},
+        {0, 0, 0}},
+
+        {{1, 1, 1},
+        {0, 0, 1},
+        {0, 0, 0}},
+
+        {{1, 1, 0},
+        {0, 1, 1},
+        {0, 0, 0}},
+
+        {{0, 1, 0},
+        {1, 1, 1},
+        {0, 1, 0}}
+    };
+    // private Treasure[][] shape;
+
+    public TreasureShape(int treasureID, int size) {
+        this.treasureID = treasureID; this.size = size;
+        spacesDug = 0;
     }
 
-    private void setShape(Treasure[][] shapeInfo) {
+    public int getSize() {return size;}
+    public int getTreasureID() {return treasureID;}
+    public static int[][][] getAllowedShapes() {return allowedShapes;}
 
+    public void digged () {spacesDug++;}
+    public boolean checkIfComplete () {
+        if(spacesDug == size) return true;
+        else return false;
     }
 
-    private Treasure[][] getShape () {
+    // TreasureShape(Treasure[][] shapeInfo) {
+    //     setShape(shapeInfo);
+    // }
+
+    // private void setShape(Treasure[][] shapeInfo) {
+
+    // }
+
+    // private Treasure[][] getShape () {
         
-        return new Treasure[1][1];
-    }
+    //     return new Treasure[1][1];
+    // }
 }

@@ -11,20 +11,22 @@ import javax.swing.JPanel;
 
 public class EventView implements MessageViewsInterface {
     private MainView mainView;
+    private DefaultListModel<String> listModel = new DefaultListModel<>();
+
     public EventView(MainView mainView){
         this.mainView = mainView;
         createEventViewGUI();
     }
     
-    public void showMessage (String message) {};
+    public void showMessage (String message) {listModel.addElement(message);};
 
     public void createEventViewGUI(){
-        DefaultListModel<String> listModel = new DefaultListModel<>();
+        //DefaultListModel<String> listModel = new DefaultListModel<>();
         
-        listModel.addElement("test 1");
-        listModel.addElement("test 2");
-        listModel.addElement("test 3");
-        listModel.addElement("test 4");
+        // listModel.addElement("test 1");
+        // listModel.addElement("test 2");
+        // listModel.addElement("test 3");
+        // listModel.addElement("test 4");
 
         JList eventListGUI = new JList<>(listModel);
         

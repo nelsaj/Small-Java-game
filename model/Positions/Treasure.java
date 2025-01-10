@@ -2,9 +2,8 @@ package model.Positions;
 
 public class Treasure extends Position {
     private int treasureID;
-    private int size;
 
-    public Treasure(int treasureID, int size) {
+    public Treasure(int treasureID) {
         setTreasureID(treasureID);
     }
 
@@ -13,12 +12,6 @@ public class Treasure extends Position {
     }
     public int getTreasureID() {
         return treasureID;
-    }
-    public void setSize(int size) {
-        this.size = size;
-    }
-    public int getSize() {
-        return size;
     }
 
     @Override

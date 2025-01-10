@@ -3,6 +3,7 @@ package controller;
 import model.GameMap;
 import model.Player;
 import model.Positions.Position;
+import model.Positions.TreasureShape;
 import view.MainView;
 
 public class MainController {
@@ -36,10 +37,13 @@ public class MainController {
         //change turn
         if(currentTurn.equals(player1)) currentTurn = player2;
         else currentTurn = player1;
+        view.changeCurrTurn(currentTurn.getPlayerNbr());
+
+        gameMapController.checkIfGameDone(currentTurn, getOpponentPlayer());
     }
 
     private Player getOpponentPlayer () {
-        if(currentTurn.equals(player1)) return player1;
-        else return player2;
+        if(currentTurn.equals(player1)) return player2;
+        else return player1;
     }
 }
