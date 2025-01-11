@@ -32,12 +32,12 @@ public class MainController {
         //FIXA MER HÄR
         view.changeButton(pos, gameMap[pos[0]][pos[1]].toString());
         gameSpace.digEvent();
-        gameMapController.digEvent(gameSpace, currentTurn, getOpponentPlayer());
+        boolean changeTurn = gameMapController.digEvent(gameSpace, currentTurn, getOpponentPlayer());
 
         gameMapController.checkIfGameDone(currentTurn, getOpponentPlayer());
         
         //change turn
-        if(true) {
+        if(changeTurn) {
             if(currentTurn.equals(player1)) currentTurn = player2;
             else currentTurn = player1;
             view.changeCurrTurn(currentTurn.getPlayerNbr());

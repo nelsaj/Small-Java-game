@@ -6,6 +6,7 @@ import model.GameMap;
 import model.Player;
 import model.Positions.Neutral;
 import model.Positions.Position;
+import model.Positions.Surprise;
 import model.Positions.Trap;
 import model.Positions.Treasure;
 import model.Positions.TreasureShape;
@@ -27,15 +28,23 @@ public class GameMapController {
     }
 
     //vet inte om den är bäst här
-    public void digEvent (Position gameSpace, Player currentPlayer, Player opponentPlayer) {
+    public boolean digEvent (Position gameSpace, Player currentPlayer, Player opponentPlayer) {
+        boolean changeTurn = true;
+
         if (gameSpace instanceof Trap) 
             activateTrap(currentPlayer, opponentPlayer);
+
+        else if(gameSpace instanceof Surprise)
+            changeTurn = activateSurprise(currentPlayer, opponentPlayer);
+
         else if(gameSpace instanceof Treasure)
             treasureCheck(gameSpace, currentPlayer);
-        else if (gameSpace instanceof Neutral){
+
+        else if (gameSpace instanceof Neutral)
             mainView.eventMessage("");
-        }
+        
         //mer if
+        return changeTurn;
     }
 
     public void treasureCheck (Position gameSpace, Player player) {
@@ -63,7 +72,6 @@ public class GameMapController {
 
     public void activateTrap(Player currentPlayer, Player opponentPlayer) {
         int randomIndex = new Random().nextInt(3);
-        randomIndex = 1;
 
         switch (randomIndex) {
             // remove points
@@ -90,8 +98,8 @@ public class GameMapController {
             // remove life
             case 2:
                 currentPlayer.removeLives(1);
+                mainView.changeLifesGUI(currentPlayer.getPlayerNbr(), String.valueOf(currentPlayer.getLives()));
         
-                // fixa sen
                 mainView.eventMessage("Player "+currentPlayer.getPlayerNbr()+" lost 1 life.");
                 break;
         
@@ -99,10 +107,44 @@ public class GameMapController {
                 break;
         }
     }
+    
+    public boolean activateSurprise(Player currPlayer, Player oppPlayer) {
+        int randomIndex = new Random().nextInt(4);
+        boolean changeTurn = true;
+
+        switch (randomIndex) {
+            case 0:
+                //add life
+                currPlayer.addLives(1);
+                mainView.changeLifesGUI(currPlayer.getPlayerNbr(), String.valueOf(currPlayer.getLives()));
+        
+                mainView.eventMessage("Player "+currPlayer.getPlayerNbr()+" gained 1 life.");
+                break;
+            case 1:
+                //get turns based on lives
+                changeTurn = false;
+
+                mainView.eventMessage("Player "+currPlayer.getPlayerNbr()+" got "+currPlayer.getLives()+" more turns.");
+                break;
+            
+            case 2: 
+                //part of treasure is dug up
+                break;
+            case 3:
+                //random position is dug
+
+                break;
+        
+            default:
+                break;
+        }
+
+        return changeTurn;
+    }
 
     public void checkIfGameDone (Player currPlayer, Player oppPlayer) {
         Player winningPlayer;
-        
+
         if(currPlayer.getLives()==0) mainView.eventMessage("Player "+currPlayer.getPlayerNbr()+" har slut på liv. Player "+oppPlayer.getPlayerNbr()+" vinner med "+oppPlayer.getScore()+" poäng!!");
 
         TreasureShape[] treasureShapes = gameMap.getTreasureShapes();
@@ -120,24 +162,5 @@ public class GameMapController {
             }
         }
     }
-    
-    
-    public void surprise1 (Player player) {
-        player.addLives(1);
-        
-        mainView.eventMessage("Player "+player.getPlayerNbr()+" gained 1 life.");
-    }
-    public void surprise2 (Player player) {
-        mainView.eventMessage("Player "+player.getPlayerNbr()+" got "+player.getLives()+" more turns.");
-    }
-    public void surprise3 (Player player, Position[][] gameMap) {
-        // int[][] treasureCoords; 
-        // for (int row = 0; row < gameMap.length; row++) {
-        //     for (int col = 0; col < gameMap[row].length; col++) {
-        //         if(gameMap[row][col] instanceof Treasure) treasureCoords
-        //     }
-        // }
 
-        //mainView.eventMessage("Player "+player.getPlayerNbr()+" got "+player.getLives()+" more turns.");
-    }
 }
