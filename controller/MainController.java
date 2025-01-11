@@ -37,7 +37,7 @@ public class MainController {
         gameMapController.checkIfGameDone(currentTurn, getOpponentPlayer());
         
         //change turn
-        if() {
+        if(true) {
             if(currentTurn.equals(player1)) currentTurn = player2;
             else currentTurn = player1;
             view.changeCurrTurn(currentTurn.getPlayerNbr());
