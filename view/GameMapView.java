@@ -55,6 +55,9 @@ public class GameMapView {
 
     public void changeButton (int[] pos, String letter) {
         buttonGrid[pos[0]][pos[1]].setText(letter);
+        if(letter == "S"){
+            buttonGrid[pos[0]][pos[1]].setBackground(Color.yellow); // test color
+        }
     }
     
     public void NEWcreateGameMapGUI(){

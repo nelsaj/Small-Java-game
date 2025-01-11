@@ -76,7 +76,7 @@ public class GameMap {
         Position[][] map = new Position[y][x];
         int trapAmount = 4; int surpriseAmount = 4;
         int treasureAmount = allowedShapes.length; // (9)
-        //treasureAmount = 3; // (9)
+     
 
         //hitta random ställe att fylla ut
         for (int i = 0; i < treasureAmount; i++) {

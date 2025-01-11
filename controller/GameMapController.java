@@ -4,6 +4,7 @@ import java.util.Random;
 
 import model.GameMap;
 import model.Player;
+import model.Positions.Neutral;
 import model.Positions.Position;
 import model.Positions.Trap;
 import model.Positions.Treasure;
@@ -31,6 +32,9 @@ public class GameMapController {
             activateTrap(currentPlayer, opponentPlayer);
         else if(gameSpace instanceof Treasure)
             treasureCheck(gameSpace, currentPlayer);
+        else if (gameSpace instanceof Neutral){
+            mainView.eventMessage("");
+        }
         //mer if
     }
 
