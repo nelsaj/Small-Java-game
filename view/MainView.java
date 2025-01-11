@@ -83,6 +83,9 @@ public class MainView extends JFrame {
     public JPanel getWindowDrawSpace() {
         return windowDrawSpace;
     }
+    public void changeLifesGUI(int whichPlayer, String lifeString){
+        playerView.changeLifesGUI(whichPlayer, lifeString);
+    }
 
     
 }
