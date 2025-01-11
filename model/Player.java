@@ -33,6 +33,9 @@ public class Player {
     public void addPoints (int points) {
         setScore(score+points);
     }
+    public void addLives (int lives) {
+        setLives(this.lives+lives);
+    }
 
     public void removePoints (int points) {
         if (points > this.score) setScore(0);
