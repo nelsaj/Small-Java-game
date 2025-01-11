@@ -12,11 +12,14 @@ public class PlayerView {
     private JLabel player2NameGUI;
     private JLabel player1PointsGUI;
     private JLabel player2PointsGUI;
+    private JLabel player1LifesGUI;
+    private JLabel player2LifesGUI;
 
     public PlayerView(MainView mainView){
         this.mainView = mainView;
         createPlayerNamesGUI("Player1", "Player2");
         createPlayerPointsCounterGUI("0", "0");
+        CreateLifesGUI("3", "3");
     }
 
     public void createPlayerNamesGUI(String player1Name, String player2Name){
@@ -56,4 +59,35 @@ public class PlayerView {
         }
     }
 
+    public void CreateLifesGUI(String player1Lifes, String player2Lifes){
+        player1LifesGUI = new JLabel(player1Lifes);
+        player2LifesGUI = new JLabel(player2Lifes);
+
+        player1LifesGUI.setFont(new Font("serif", Font.PLAIN, 18));
+        player2LifesGUI.setFont(new Font("serif", Font.PLAIN, 18));
+
+        player1LifesGUI.setBounds(150, 30, 50, 50);
+        player2LifesGUI.setBounds(400, 30, 50, 50);
+
+        mainView.getWindowDrawSpace().add(player1LifesGUI);
+        mainView.getWindowDrawSpace().add(player2LifesGUI);
+
+        JLabel livesTextLabel1 = new JLabel("Lifes ");
+        JLabel livesTextLabel2 = new JLabel("Lifes ");
+
+        livesTextLabel1.setFont(new Font("serif", Font.PLAIN, 18));
+        livesTextLabel2.setFont(new Font("serif", Font.PLAIN, 18));
+
+        livesTextLabel1.setBounds(50, 30, 50, 50);
+        livesTextLabel2.setBounds(300, 30, 50, 50);
+        
+        mainView.getWindowDrawSpace().add(livesTextLabel1);
+        mainView.getWindowDrawSpace().add(livesTextLabel2);
+    }
+
+    public void changeLifesGUI(int whichPlayer, String newLifes){
+        if(whichPlayer == 1){player1LifesGUI.setText(newLifes);}
+        if(whichPlayer == 2){player2LifesGUI.setText(newLifes);}
+    }
+    
 }
