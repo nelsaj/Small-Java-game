@@ -86,6 +86,9 @@ public class MainView extends JFrame {
     public void changeLifesGUI(int whichPlayer, String lifeString){
         playerView.changeLifesGUI(whichPlayer, lifeString);
     }
+    public void disableMap(){
+        gameMapView.disablemap();
+    }
 
     
 }
