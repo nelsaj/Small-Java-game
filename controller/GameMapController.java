@@ -97,13 +97,14 @@ public class GameMapController {
     }
 
     public void checkIfGameDone (Player currPlayer, Player oppPlayer) {
+        Player winningPlayer;
+        
         if(currPlayer.getLives()==0) mainView.eventMessage("Player "+currPlayer.getPlayerNbr()+" har slut på liv. Player "+oppPlayer.getPlayerNbr()+" vinner med "+oppPlayer.getScore()+" poäng!!");
 
         TreasureShape[] treasureShapes = gameMap.getTreasureShapes();
         for (int i = 0; i < treasureShapes.length; i++) {
             if(!treasureShapes[i].checkIfComplete()) break;
             if(i == treasureShapes.length-1) {
-                Player winningPlayer;
                 if(currPlayer.getScore() > oppPlayer.getScore()) {
                     winningPlayer = currPlayer;
                 }
@@ -118,7 +119,7 @@ public class GameMapController {
     
     
     public void surprise1 (Player player) {
-        player.setLives(player.getLives() + 1);
+        player.addLives(1);
         
         mainView.eventMessage("Player "+player.getPlayerNbr()+" gained 1 life.");
     }
