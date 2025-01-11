@@ -12,6 +12,14 @@ import model.Positions.TreasureShape;
 public class GameMap {
     final int randomInt = new Random().nextInt(2);
 
+
+
+    final int x = 10; final int y = 10;
+    final Position[][] map = new Position[y][x];
+    final int trapAmount = 4; final int surpriseAmount = 4;
+    final int[][][] allowedShapes = TreasureShape.getAllowedShapes();
+    final int treasureAmount = allowedShapes.length; // (9)
+
     TreasureShape[] treasureShapes;
 
     // final TreasureShape[][] treasureShapes = {
@@ -70,14 +78,6 @@ public class GameMap {
     };
 
     public Position[][] makeRandomMap () {
-        int[][][] allowedShapes = TreasureShape.getAllowedShapes();
-
-        int x = 10; int y = 10;
-        Position[][] map = new Position[y][x];
-        int trapAmount = 4; int surpriseAmount = 4;
-        int treasureAmount = allowedShapes.length; // (9)
-     
-
         //hitta random ställe att fylla ut
         for (int i = 0; i < treasureAmount; i++) {
             int randomX; int randomY;
@@ -91,7 +91,7 @@ public class GameMap {
                 String[] directions = {"vertical", "horizontal"};
                 randomDirection = directions[new Random().nextInt(2)];
             }
-            while (!treasureChecker(allowedShapes, i, map, randomDirection, randomX, randomY, x, y));
+            while (!treasureChecker(i, randomX, randomY, randomDirection));
 
             // sätter ut skatter
             for (int row = 0; row < allowedShapes[i].length; row++) {
@@ -107,8 +107,8 @@ public class GameMap {
         }
 
         //fyller tomma positioner med fällor och överraskningar
-        fillPosition(new Trap(), trapAmount, map, x, y);
-        fillPosition(new Surprise(), surpriseAmount, map, x, y);
+        fillPosition(new Trap(), trapAmount);
+        fillPosition(new Surprise(), surpriseAmount);
 
         // gör resten neutrala
         for (int row = 0; row < y; row++) {
@@ -122,7 +122,7 @@ public class GameMap {
 
         return map;
     }
-    private boolean treasureChecker (int[][][] allowedShapes, int i, Position[][]map, String randomDirection, int randomX, int randomY, int x, int y) {
+    private boolean treasureChecker (int i, int randomX, int randomY, String randomDirection) {
         for (int row = 0; row < allowedShapes[i].length; row++) {
             for (int col = 0; col < allowedShapes[i][row].length; col++) {
                 // om 0 ska det vara tomt, behöver inte kollas
@@ -141,7 +141,7 @@ public class GameMap {
         //om man kommit hit var det inga problem
         return true;
     }
-    private void fillPosition (Position position, int amount, Position[][] map, int x, int y) {
+    private void fillPosition (Position position, int amount) {
         // första loop bestämmer hur många
         for (int i = 0; i < amount; i++) {
             int randomX; int randomY;
