@@ -76,7 +76,6 @@ public class GameMapController {
 
     public void activateTrap(Player currentPlayer, Player opponentPlayer) {
         int randomIndex = new Random().nextInt(3);
-
         switch (randomIndex) {
             // remove points
             case 0:
@@ -146,7 +145,10 @@ public class GameMapController {
     public void checkIfGameDone (Player currPlayer, Player oppPlayer) {
         Player winningPlayer;
 
-        if(currPlayer.getLives()==0) mainView.eventMessage("Player "+currPlayer.getPlayerNbr()+" har slut på liv. Player "+oppPlayer.getPlayerNbr()+" vinner med "+oppPlayer.getScore()+" poäng!!");
+        if(currPlayer.getLives()==0) {
+            mainView.eventMessage("Player "+currPlayer.getPlayerNbr()+" har slut på liv. Player "+oppPlayer.getPlayerNbr()+" vinner med "+oppPlayer.getScore()+" poäng!!");
+            mainView.disableMap();
+        }
 
         TreasureShape[] treasureShapes = gameMap.getTreasureShapes();
         for (int i = 0; i < treasureShapes.length; i++) {
@@ -160,6 +162,7 @@ public class GameMapController {
                 }
 
                 mainView.eventMessage("Alla skatter hittade. Player "+winningPlayer.getPlayerNbr()+" vinner med "+winningPlayer.getScore()+" poäng!!");
+                mainView.disableMap();
             }
         }
     }

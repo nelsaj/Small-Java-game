@@ -90,4 +90,11 @@ public class GameMapView {
         }
         mainView.getWindowDrawSpace().add(gameMapGUI);
     }
+    public void disablemap(){
+        for (int y = 0; y < buttonGrid.length; y++) {
+            for (int x = 0; x < buttonGrid.length; x++) {
+                buttonGrid[y][x].setEnabled(false);
+            }
+        }
+    }
 }
