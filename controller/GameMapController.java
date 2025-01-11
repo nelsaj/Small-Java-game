@@ -18,9 +18,13 @@ public class GameMapController {
     MainView mainView;
     GameMap gameMap;
 
+    int extraTurns;
+
     GameMapController(MainView mainView) {
         this.gameMap = new GameMap();
         this.mainView = mainView;
+
+        extraTurns = 0;
     }
 
     public Position[][] generateMap () {
@@ -29,13 +33,13 @@ public class GameMapController {
 
     //vet inte om den är bäst här
     public boolean digEvent (Position gameSpace, Player currentPlayer, Player opponentPlayer) {
-        boolean changeTurn = true;
+        if(extraTurns > 0) extraTurns--;
 
         if (gameSpace instanceof Trap) 
             activateTrap(currentPlayer, opponentPlayer);
 
         else if(gameSpace instanceof Surprise)
-            changeTurn = activateSurprise(currentPlayer, opponentPlayer);
+            activateSurprise(currentPlayer, opponentPlayer);
 
         else if(gameSpace instanceof Treasure)
             treasureCheck(gameSpace, currentPlayer);
@@ -44,7 +48,7 @@ public class GameMapController {
             mainView.eventMessage("");
         
         //mer if
-        return changeTurn;
+        return !(extraTurns > 0);
     }
 
     public void treasureCheck (Position gameSpace, Player player) {
@@ -85,8 +89,8 @@ public class GameMapController {
             
             //give points
             case 1:
-                //FIXA TILL
-                int points = currentPlayer.getScore() / 2; 
+                int points = (int) currentPlayer.getScore() / 2; 
+
                 currentPlayer.removePoints(points); 
                 opponentPlayer.addPoints(points); 
             
@@ -108,9 +112,8 @@ public class GameMapController {
         }
     }
     
-    public boolean activateSurprise(Player currPlayer, Player oppPlayer) {
+    public void activateSurprise(Player currPlayer, Player oppPlayer) {
         int randomIndex = new Random().nextInt(4);
-        boolean changeTurn = true;
 
         switch (randomIndex) {
             case 0:
@@ -122,9 +125,9 @@ public class GameMapController {
                 break;
             case 1:
                 //get turns based on lives
-                changeTurn = false;
+                extraTurns = currPlayer.getLives();
 
-                mainView.eventMessage("Player "+currPlayer.getPlayerNbr()+" got "+currPlayer.getLives()+" more turns.");
+                mainView.eventMessage("Player "+currPlayer.getPlayerNbr()+" fick "+currPlayer.getLives()+" lika många extra drag som liv.");
                 break;
             
             case 2: 
@@ -138,8 +141,6 @@ public class GameMapController {
             default:
                 break;
         }
-
-        return changeTurn;
     }
 
     public void checkIfGameDone (Player currPlayer, Player oppPlayer) {
