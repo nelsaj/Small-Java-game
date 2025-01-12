@@ -17,8 +17,10 @@ import view.MainView;
 public class GameMapController {
     MainView mainView;
     GameMap gameMap;
+    Position[][] map;
 
     int extraTurns;
+    String extraMessage;
 
     GameMapController(MainView mainView) {
         this.gameMap = new GameMap();
@@ -28,7 +30,8 @@ public class GameMapController {
     }
 
     public Position[][] generateMap () {
-        return gameMap.makeRandomMap();
+        gameMap.makeRandomMap(); map = gameMap.getMap();
+        return map;
     }
 
     //vet inte om den är bäst här
@@ -45,9 +48,8 @@ public class GameMapController {
             treasureCheck(gameSpace, currentPlayer);
 
         else if (gameSpace instanceof Neutral)
-            mainView.eventMessage("");
+            eventMessage("");
         
-        //mer if
         return !(extraTurns > 0);
     }
 
@@ -59,14 +61,14 @@ public class GameMapController {
             if(treasureShape.getTreasureID() == ((Treasure) gameSpace).getTreasureID()) {
                 // markera som grävd
                 treasureShape.digged();
-                mainView.eventMessage("Player "+player.getPlayerNbr()+" grävde upp en del av en skatt!");
+                eventMessage("Player "+player.getPlayerNbr()+" grävde upp en del av en skatt!");
 
                 // kolla om klar
                 if(treasureShape.checkIfComplete()) {
                     int points = treasureShape.getSize(); 
                     player.addPoints(points); 
                     mainView.changePoints(player.getPlayerNbr(), String.valueOf(player.getScore()));
-                    mainView.eventMessage("Player "+player.getPlayerNbr()+" grävde upp en skatt! Plus "+points+" poäng.");
+                    eventMessage("Player "+player.getPlayerNbr()+" grävde upp en skatt! Plus "+points+" poäng.");
                 }
                 break;
             }
@@ -83,7 +85,7 @@ public class GameMapController {
                 currentPlayer.removePoints(removerPoints);
     
                 mainView.changePoints(currentPlayer.getPlayerNbr(), String.valueOf(currentPlayer.getScore()));
-                mainView.eventMessage("Player "+currentPlayer.getPlayerNbr()+" lost "+removerPoints+" points.");
+                eventMessage("Player "+currentPlayer.getPlayerNbr()+" lost "+removerPoints+" points.");
                 break;
             
             //give points
@@ -95,7 +97,7 @@ public class GameMapController {
             
                 mainView.changePoints(currentPlayer.getPlayerNbr(), String.valueOf(currentPlayer.getScore()));
                 mainView.changePoints(opponentPlayer.getPlayerNbr(), String.valueOf(opponentPlayer.getScore()));
-                mainView.eventMessage("Player "+opponentPlayer.getPlayerNbr()+" recieved "+points+" points from player "+currentPlayer.getPlayerNbr()+".");
+                eventMessage("Player "+opponentPlayer.getPlayerNbr()+" recieved "+points+" points from player "+currentPlayer.getPlayerNbr()+".");
                 break;
 
             // remove life
@@ -103,7 +105,7 @@ public class GameMapController {
                 currentPlayer.removeLives(1);
                 mainView.changeLifesGUI(currentPlayer.getPlayerNbr(), String.valueOf(currentPlayer.getLives()));
         
-                mainView.eventMessage("Player "+currentPlayer.getPlayerNbr()+" lost 1 life.");
+                eventMessage("Player "+currentPlayer.getPlayerNbr()+" lost 1 life.");
                 break;
         
             default:
@@ -113,6 +115,7 @@ public class GameMapController {
     
     public void activateSurprise(Player currPlayer, Player oppPlayer) {
         int randomIndex = new Random().nextInt(4);
+        randomIndex = 1;
 
         switch (randomIndex) {
             case 0:
@@ -120,26 +123,50 @@ public class GameMapController {
                 currPlayer.addLives(1);
                 mainView.changeLifesGUI(currPlayer.getPlayerNbr(), String.valueOf(currPlayer.getLives()));
         
-                mainView.eventMessage("Player "+currPlayer.getPlayerNbr()+" gained 1 life.");
+                eventMessage("Player "+currPlayer.getPlayerNbr()+" gained 1 life.");
                 break;
             case 1:
                 //get turns based on lives
                 extraTurns = currPlayer.getLives();
 
-                mainView.eventMessage("Player "+currPlayer.getPlayerNbr()+" fick "+currPlayer.getLives()+" lika många extra drag som liv.");
-                break;
-            
-            case 2: 
-                //part of treasure is dug up
-                break;
-            case 3:
-                //random position is dug
+                String message = "Player "+currPlayer.getPlayerNbr()+" fick extra drag. "+currPlayer.getLives()+" stycken.";
+                eventMessage(message);
+                extraMessage = message;
 
+                break;
+                
+                case 2: 
+                //part of treasure is dug up
+                int treasureAmount = gameMap.getTreasureAmount();
+                TreasureShape randomTreasureShape;
+
+                do {
+                    randomTreasureShape = gameMap.getTreasureShapes()[new Random().nextInt(treasureAmount)];
+                } while(randomTreasureShape.checkIfComplete());
+                
+                
+                
+                break;
+                case 3:
+                //random position is dug
+                int x = gameMap.getXMax(); int y = gameMap.getYMax();
+                int randomX; int randomY;
+                do {
+                    randomX = new Random().nextInt(x); randomY = new Random().nextInt(y);
+                } while(map[randomX][randomY].getDigStatus());
+                
+                extraMessage = "Player "+currPlayer.getPlayerNbr()+" får en random ruta uppgrävd."+randomX+" "+randomY;
+
+                map[randomX][randomY].digEvent();
+                digEvent(map[randomX][randomY], currPlayer, oppPlayer);
+                mainView.changeButton(new int[]{randomX, randomY}, map[randomX][randomY].toString());
+                
                 break;
         
             default:
                 break;
-        }
+
+            }
     }
 
     public void checkIfGameDone (Player currPlayer, Player oppPlayer) {
@@ -167,4 +194,11 @@ public class GameMapController {
         }
     }
 
+    private void eventMessage (String message) {
+        if(extraMessage==null) mainView.eventMessage(message);
+        else {
+            mainView.eventMessage(extraMessage+"\n"+message);
+            if(extraTurns == 0) extraMessage = null;
+        }
+    }
 }

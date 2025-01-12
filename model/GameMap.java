@@ -16,7 +16,7 @@ public class GameMap {
 
     final int x = 10; final int y = 10;
     final Position[][] map = new Position[y][x];
-    final int trapAmount = 10; final int surpriseAmount = 4;
+    final int trapAmount = 10; final int surpriseAmount = 10;
     final int[][][] allowedShapes = TreasureShape.getAllowedShapes();
     final int treasureAmount = allowedShapes.length; // (9)
 
@@ -77,7 +77,7 @@ public class GameMap {
         return gameMaps[randomInt];
     };
 
-    public Position[][] makeRandomMap () {
+    public void makeRandomMap () {
         //hitta random ställe att fylla ut
         for (int i = 0; i < treasureAmount; i++) {
             int randomX; int randomY;
@@ -119,8 +119,6 @@ public class GameMap {
 
         // skapa treasureshapes
         makeTreasureShapes(treasureAmount, allowedShapes);
-
-        return map;
     }
     private boolean treasureChecker (int i, int randomX, int randomY, String randomDirection) {
         for (int row = 0; row < allowedShapes[i].length; row++) {
@@ -170,5 +168,19 @@ public class GameMap {
 
     public TreasureShape[] getTreasureShapes () {
         return treasureShapes;
+    }
+
+    public Position[][] getMap () {
+        return map;
+    }
+
+    public int getYMax () {
+        return y;
+    }
+    public int getXMax () {
+        return x;
+    }
+    public int getTreasureAmount() {
+        return treasureAmount;
     }
 }

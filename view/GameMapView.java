@@ -54,6 +54,10 @@ public class GameMapView {
     // }
 
     public void changeButton (int[] pos, String letter) {
+        // funkar inte på mac :( vvv
+        buttonGrid[pos[0]][pos[1]].setBackground(new Color(123)); // test color
+        buttonGrid[pos[0]][pos[1]].setEnabled(false);
+
         buttonGrid[pos[0]][pos[1]].setText(letter);
         if(letter == "S"){
             buttonGrid[pos[0]][pos[1]].setBackground(Color.yellow); // test color
@@ -75,9 +79,6 @@ public class GameMapView {
                         int row = Integer.parseInt(e.getActionCommand().split(",")[0]);
                         int colum = Integer.parseInt(e.getActionCommand().split(",")[1]);
                         System.out.println(row + ", " + colum);
-                        // funkar inte på mac :( vvv
-                        gameMapPostionBtn.setBackground(new Color(123)); // test color
-                        gameMapPostionBtn.setEnabled(false);
                         
                         //testing
                         mainView.buttonPressed(new int[]{row, colum});
