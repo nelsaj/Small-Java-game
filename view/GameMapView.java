@@ -1,5 +1,6 @@
 package view;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.Color;
@@ -89,6 +90,11 @@ public class GameMapView {
             }
         }
         mainView.getWindowDrawSpace().add(gameMapGUI);
+    }
+    public String popUpEnterName(){
+        JOptionPane popup = new JOptionPane();
+        String name = popup.showInputDialog("You won, input your name for the highscorelist: ");
+        return name;
     }
     public void disablemap(){
         for (int y = 0; y < buttonGrid.length; y++) {

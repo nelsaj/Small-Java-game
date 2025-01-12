@@ -39,6 +39,7 @@ public class StartView extends JFrame {
             public void actionPerformed(ActionEvent e){
                 System.out.println("highscore clicked");
                 mainView.clearWindow();
+                mainView.createHighscoreView();
             }
         });
 

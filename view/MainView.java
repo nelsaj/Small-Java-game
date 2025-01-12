@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controller.MainController;
@@ -17,6 +18,7 @@ public class MainView extends JFrame {
     private EventView eventView;
     private PlayerView playerView;
     private StartView startView;
+    private Highscoreview highscoreview;
 
     public MainView(int windowWidth, int windowHeight, MainController controller){      
         super("Game");
@@ -45,6 +47,10 @@ public class MainView extends JFrame {
         playerView = new PlayerView(this);
         eventView = new EventView(this);
         startView = new StartView(this);
+    }
+    public void createHighscoreView(){
+        highscoreview = new Highscoreview(this);
+        highscoreview.createHighScoreGUI();
     }
 
     public void eventMessage(String message) {eventView.showMessage(message);}
@@ -88,6 +94,10 @@ public class MainView extends JFrame {
     }
     public void disableMap(){
         gameMapView.disablemap();
+    }
+
+    public String popUpEnterName(){
+        return gameMapView.popUpEnterName();    
     }
 
     
