@@ -43,7 +43,6 @@ public class TreasureShape {
         {1, 1, 1},
         {0, 1, 0}}
     };
-    // private Treasure[][] shape;
 
     public TreasureShape(int treasureID, int size) {
         this.treasureID = treasureID; this.size = size;
