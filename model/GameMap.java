@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import model.Positions.Neutral;
@@ -21,6 +22,7 @@ public class GameMap {
     final int treasureAmount = allowedShapes.length; // (9)
 
     TreasureShape[] treasureShapes;
+    ArrayList <int[]> treasureCoords = new ArrayList<int[]>();
 
     // final TreasureShape[][] treasureShapes = {
     //     {
@@ -101,7 +103,11 @@ public class GameMap {
                     if(randomDirection == "vertical") {xpos = randomX+col; ypos = randomY+row;}
                     else {xpos = randomX+row; ypos = randomY+col;}
 
-                    if(allowedShapes[i][row][col] == 1) map[xpos][ypos] = new Treasure(i);
+                    if(allowedShapes[i][row][col] == 1) {
+                        map[xpos][ypos] = new Treasure(i); 
+                        treasureCoords.add(new int[]{xpos, ypos});
+                    }
+
                 }
             }
         }
@@ -166,6 +172,15 @@ public class GameMap {
         }
     }
 
+    public int[] getFreeCoords () {
+        int randomX; int randomY;
+        do {
+            randomX = new Random().nextInt(x); randomY = new Random().nextInt(y);
+        } while(map[randomX][randomY].getDigStatus());
+
+        return new int[]{randomX, randomY};
+    }
+
     public TreasureShape[] getTreasureShapes () {
         return treasureShapes;
     }
@@ -182,5 +197,8 @@ public class GameMap {
     }
     public int getTreasureAmount() {
         return treasureAmount;
+    }
+    public ArrayList <int[]> getTreasureCoords() {
+        return treasureCoords;
     }
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import model.GameMap;
@@ -32,6 +33,9 @@ public class GameMapController {
     public Position[][] generateMap () {
         gameMap.makeRandomMap(); map = gameMap.getMap();
         return map;
+    }
+    public GameMap getMapModel () {
+        return gameMap;
     }
 
     //vet inte om den är bäst här
@@ -85,7 +89,7 @@ public class GameMapController {
                 currentPlayer.removePoints(removerPoints);
     
                 mainView.changePoints(currentPlayer.getPlayerNbr(), String.valueOf(currentPlayer.getScore()));
-                eventMessage("Player "+currentPlayer.getPlayerNbr()+" lost "+removerPoints+" points.");
+                eventMessage("Player "+currentPlayer.getPlayerNbr()+" förlorade poäng.");
                 break;
             
             //give points
@@ -97,7 +101,7 @@ public class GameMapController {
             
                 mainView.changePoints(currentPlayer.getPlayerNbr(), String.valueOf(currentPlayer.getScore()));
                 mainView.changePoints(opponentPlayer.getPlayerNbr(), String.valueOf(opponentPlayer.getScore()));
-                eventMessage("Player "+opponentPlayer.getPlayerNbr()+" recieved "+points+" points from player "+currentPlayer.getPlayerNbr()+".");
+                eventMessage("Player "+opponentPlayer.getPlayerNbr()+" fick "+points+" poäng från player "+currentPlayer.getPlayerNbr()+".");
                 break;
 
             // remove life
@@ -105,7 +109,7 @@ public class GameMapController {
                 currentPlayer.removeLives(1);
                 mainView.changeLifesGUI(currentPlayer.getPlayerNbr(), String.valueOf(currentPlayer.getLives()));
         
-                eventMessage("Player "+currentPlayer.getPlayerNbr()+" lost 1 life.");
+                eventMessage("Player "+currentPlayer.getPlayerNbr()+" förlorade 1 liv.");
                 break;
         
             default:
@@ -115,7 +119,6 @@ public class GameMapController {
     
     public void activateSurprise(Player currPlayer, Player oppPlayer) {
         int randomIndex = new Random().nextInt(4);
-        randomIndex = 1;
 
         switch (randomIndex) {
             case 0:
@@ -123,7 +126,7 @@ public class GameMapController {
                 currPlayer.addLives(1);
                 mainView.changeLifesGUI(currPlayer.getPlayerNbr(), String.valueOf(currPlayer.getLives()));
         
-                eventMessage("Player "+currPlayer.getPlayerNbr()+" gained 1 life.");
+                eventMessage("Player "+currPlayer.getPlayerNbr()+" fick 1 liv.");
                 break;
             case 1:
                 //get turns based on lives
@@ -135,65 +138,38 @@ public class GameMapController {
 
                 break;
                 
-                case 2: 
+                case 2: {
                 //part of treasure is dug up
-                int treasureAmount = gameMap.getTreasureAmount();
-                TreasureShape randomTreasureShape;
-
+                ArrayList <int[]> treasureCoords = gameMap.getTreasureCoords();
+                int[] randomCoord;
                 do {
-                    randomTreasureShape = gameMap.getTreasureShapes()[new Random().nextInt(treasureAmount)];
-                } while(randomTreasureShape.checkIfComplete());
-                
-                
-                
+                    randomCoord = treasureCoords.get(new Random().nextInt(treasureCoords.size()));
+                } while(map[randomCoord[0]][randomCoord[1]].getDigStatus());
+
+                extraMessage = "Player "+currPlayer.getPlayerNbr()+" får en del av en skatt uppgrävd.";
+
+                map[randomCoord[0]][randomCoord[1]].digEvent();
+                digEvent(map[randomCoord[0]][randomCoord[1]], currPlayer, oppPlayer);
+                mainView.changeButton(randomCoord, map[randomCoord[0]][randomCoord[1]].toString());
+
                 break;
+                }
+                
                 case 3:
                 //random position is dug
-                int x = gameMap.getXMax(); int y = gameMap.getYMax();
-                int randomX; int randomY;
-                do {
-                    randomX = new Random().nextInt(x); randomY = new Random().nextInt(y);
-                } while(map[randomX][randomY].getDigStatus());
+                int[] freeCoords = gameMap.getFreeCoords();
                 
-                extraMessage = "Player "+currPlayer.getPlayerNbr()+" får en random ruta uppgrävd."+randomX+" "+randomY;
-
-                map[randomX][randomY].digEvent();
-                digEvent(map[randomX][randomY], currPlayer, oppPlayer);
-                mainView.changeButton(new int[]{randomX, randomY}, map[randomX][randomY].toString());
+                map[freeCoords[0]][freeCoords[1]].digEvent();
+                digEvent(map[freeCoords[0]][freeCoords[1]], currPlayer, oppPlayer);
+                mainView.changeButton(freeCoords, map[freeCoords[0]][freeCoords[1]].toString());
                 
+                extraMessage = "Player "+currPlayer.getPlayerNbr()+" får en slumpmässig ruta uppgrävd."+freeCoords[0]+" "+freeCoords[1];
                 break;
         
             default:
                 break;
 
             }
-    }
-
-    public void checkIfGameDone (Player currPlayer, Player oppPlayer) {
-        Player winningPlayer;
-        String winningPlayerName;
-        if(currPlayer.getLives()==0) {
-            mainView.eventMessage("Player "+currPlayer.getPlayerNbr()+" har slut på liv. Player "+oppPlayer.getPlayerNbr()+" vinner med "+oppPlayer.getScore()+" poäng!!");
-            mainView.disableMap();
-            winningPlayerName = mainView.popUpEnterName();
-        }
-
-        TreasureShape[] treasureShapes = gameMap.getTreasureShapes();
-        for (int i = 0; i < treasureShapes.length; i++) {
-            if(!treasureShapes[i].checkIfComplete()) break;
-            if(i == treasureShapes.length-1) {
-                if(currPlayer.getScore() > oppPlayer.getScore()) {
-                    winningPlayer = currPlayer;
-                }
-                else {
-                    winningPlayer = oppPlayer;
-                }
-
-                mainView.eventMessage("Alla skatter hittade. Player "+winningPlayer.getPlayerNbr()+" vinner med "+winningPlayer.getScore()+" poäng!!");
-                mainView.disableMap();
-                winningPlayerName = mainView.popUpEnterName();
-            }
-        }
     }
 
     private void eventMessage (String message) {
