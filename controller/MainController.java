@@ -23,9 +23,7 @@ public class MainController {
     private Player player1;
     private Player player2;
     private Player currentTurn;
-    //currentTurn här eller i player??
-
-    
+ 
     public MainController(){
         view = new MainView(1000,600, this);
         gameMapController = new GameMapController(view);
