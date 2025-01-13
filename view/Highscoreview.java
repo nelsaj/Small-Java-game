@@ -33,7 +33,7 @@ public class Highscoreview {
 
                System.out.println(playerName);
                System.out.println(playerPoints);
-
+                
                 linesAsArrays.add(stringLineArr);
             }
         } catch (IOException e) {

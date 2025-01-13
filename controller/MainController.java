@@ -1,5 +1,10 @@
 package controller;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
+import javax.swing.JOptionPane;
+
 import model.GameMap;
 import model.Player;
 import model.Positions.Position;
@@ -49,5 +54,5 @@ public class MainController {
         else return player1;
     }
 
-   
+    
 }
