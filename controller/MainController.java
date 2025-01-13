@@ -1,5 +1,14 @@
 package controller;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import model.GameMap;
 import model.Player;
 import model.Positions.Position;
@@ -34,7 +43,7 @@ public class MainController {
         gameSpace.digEvent();
         boolean changeTurn = gameMapController.digEvent(gameSpace, currentTurn, getOpponentPlayer());
 
-        checkIfGameDone(currentTurn, getOpponentPlayer());
+        checkIfGameDone();
         
         //change turn
         if(changeTurn) {
@@ -49,12 +58,14 @@ public class MainController {
         else return player1;
     }
 
-    public void checkIfGameDone (Player currPlayer, Player oppPlayer) {
+    public void checkIfGameDone () {
         Player winningPlayer;
         String winningPlayerName;
+
+        Player oppPlayer = getOpponentPlayer();
         
-        if(currPlayer.getLives()==0) {
-            view.eventMessage("Player "+currPlayer.getPlayerNbr()+" har slut på liv. Player "+oppPlayer.getPlayerNbr()+" vinner med "+oppPlayer.getScore()+" poäng!!");
+        if(currentTurn.getLives()==0) {
+            view.eventMessage("Player "+currentTurn.getPlayerNbr()+" har slut på liv. Player "+oppPlayer.getPlayerNbr()+" vinner med "+oppPlayer.getScore()+" poäng!!");
             view.disableMap();
             winningPlayerName = view.popUpEnterName();
         }
@@ -63,8 +74,8 @@ public class MainController {
         for (int i = 0; i < treasureShapes.length; i++) {
             if(!treasureShapes[i].checkIfComplete()) break;
             if(i == treasureShapes.length-1) {
-                if(currPlayer.getScore() > oppPlayer.getScore()) {
-                    winningPlayer = currPlayer;
+                if(currentTurn.getScore() > oppPlayer.getScore()) {
+                    winningPlayer = currentTurn;
                 }
                 else {
                     winningPlayer = oppPlayer;
@@ -73,9 +84,44 @@ public class MainController {
                 view.eventMessage("Alla skatter hittade. Player "+winningPlayer.getPlayerNbr()+" vinner med "+winningPlayer.getScore()+" poäng!!");
                 view.disableMap();
                 winningPlayerName = view.popUpEnterName();
+                addPlayerToHighScorelist(winningPlayerName, Integer.toString(winningPlayer.getScore()));
             }
         }
     }
 
-   
+       public void addPlayerToHighScorelist(String name, String points) {
+        String filePath = "./Highscore.txt";
+        List<String[]> linesAsArrays = new ArrayList<>();
+    
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] stringLineArr = line.split(",");
+                linesAsArrays.add(stringLineArr);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(view, "Error reading the high score file.");
+            return;
+        }
+    
+        String[] newWinningPlayer = {name, points};
+        linesAsArrays.add(newWinningPlayer);
+    
+        linesAsArrays.sort((a, b) -> Integer.compare(
+            Integer.parseInt(b[1].trim()), 
+            Integer.parseInt(a[1].trim())
+        ));
+
+        try {
+            FileWriter fileWriter = new FileWriter(filePath);
+            for (String[] ele : linesAsArrays) {
+                String insertStringIntoHighscore = ele[0] + "," + ele[1] + "\n";
+                fileWriter.write(insertStringIntoHighscore);
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(view, "Something went wrong while writing the high score file.");
+        }
+    }
 }
