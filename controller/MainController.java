@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -91,9 +90,9 @@ public class MainController {
         }
     }
 
-       public void addPlayerToHighScorelist(String name, String points) {
+    public void addPlayerToHighScorelist(String name, String points) {
         String filePath = "./Highscore.txt";
-        List<String[]> linesAsArrays = new ArrayList<>();
+        ArrayList<String[]> linesAsArrays = new ArrayList<>();
         
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));

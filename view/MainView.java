@@ -37,7 +37,8 @@ public class MainView extends JFrame {
         windowDrawSpace.setLayout(null);
         
         this.add(windowDrawSpace);
-        new StartView(this).createStartView();
+        startView = new StartView(this);
+        startView.createStartView();
         
         this.controller = controller;       
     }
@@ -46,7 +47,6 @@ public class MainView extends JFrame {
         gameMapView = new GameMapView(this);
         playerView = new PlayerView(this);
         eventView = new EventView(this);
-        startView = new StartView(this);
     }
     public void createHighscoreView(){
         highscoreview = new Highscoreview(this);

@@ -17,8 +17,8 @@ public class GameMap {
     final int[][][] allowedShapes = TreasureShape.getAllowedShapes();
     final int treasureAmount = allowedShapes.length; // (9)
 
-    TreasureShape[] treasureShapes;
-    ArrayList <int[]> treasureCoords;
+    private TreasureShape[] treasureShapes;
+    private ArrayList <int[]> treasureCoords;
 
     public GameMap () {
         treasureCoords = new ArrayList<int[]>();
