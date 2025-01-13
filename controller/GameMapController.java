@@ -1,14 +1,7 @@
 package controller;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-
-import javax.swing.JOptionPane;
 
 import model.GameMap;
 import model.Player;
@@ -18,8 +11,6 @@ import model.Positions.Surprise;
 import model.Positions.Trap;
 import model.Positions.Treasure;
 import model.Positions.TreasureShape;
-import view.EventView;
-import view.GameMapView;
 import view.MainView;
 
 public class GameMapController {
@@ -38,25 +29,22 @@ public class GameMapController {
     }
 
     public Position[][] generateMap () {
-        gameMap.makeRandomMap(); map = gameMap.getMap();
+        gameMap = new GameMap(); map = gameMap.getMap();
         return map;
     }
-    public GameMap getMapModel () {
-        return gameMap;
-    }
+    public GameMap getMapModel () {return gameMap;}
 
-    //vet inte om den är bäst här
     public boolean digEvent (Position gameSpace, Player currentPlayer, Player opponentPlayer) {
         if(extraTurns > 0) extraTurns--;
 
-        if (gameSpace instanceof Trap) 
+        if(gameSpace instanceof Treasure)
+            treasureCheck(gameSpace, currentPlayer);
+
+        else if (gameSpace instanceof Trap) 
             activateTrap(currentPlayer, opponentPlayer);
 
         else if(gameSpace instanceof Surprise)
             activateSurprise(currentPlayer, opponentPlayer);
-
-        else if(gameSpace instanceof Treasure)
-            treasureCheck(gameSpace, currentPlayer);
 
         else if (gameSpace instanceof Neutral)
             eventMessage("");
@@ -145,7 +133,7 @@ public class GameMapController {
 
                 break;
                 
-                case 2: {
+            case 2: {
                 //part of treasure is dug up
                 ArrayList <int[]> treasureCoords = gameMap.getTreasureCoords();
                 int[] randomCoord;
@@ -160,11 +148,16 @@ public class GameMapController {
                 mainView.changeButton(randomCoord, map[randomCoord[0]][randomCoord[1]].toString());
 
                 break;
-                }
+            }
                 
-                case 3:
+            case 3:
                 //random position is dug
-                int[] freeCoords = gameMap.getFreeCoords();
+                int maxX = gameMap.getXMax(); int maxY = gameMap.getYMax();
+                int randomX; int randomY;
+                do {
+                    randomX = new Random().nextInt(maxX); randomY = new Random().nextInt(maxY);
+                } while(map[randomX][randomY].getDigStatus());
+                int[] freeCoords = new int[]{randomX, randomY};
                 
                 map[freeCoords[0]][freeCoords[1]].digEvent();
                 digEvent(map[freeCoords[0]][freeCoords[1]], currPlayer, oppPlayer);

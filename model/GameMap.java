@@ -11,10 +11,6 @@ import model.Positions.Treasure;
 import model.Positions.TreasureShape;
 
 public class GameMap {
-    final int randomInt = new Random().nextInt(2);
-
-
-
     final int x = 10; final int y = 10;
     final Position[][] map = new Position[y][x];
     final int trapAmount = 10; final int surpriseAmount = 10;
@@ -22,64 +18,14 @@ public class GameMap {
     final int treasureAmount = allowedShapes.length; // (9)
 
     TreasureShape[] treasureShapes;
-    ArrayList <int[]> treasureCoords = new ArrayList<int[]>();
+    ArrayList <int[]> treasureCoords;
 
-    // final TreasureShape[][] treasureShapes = {
-    //     {
-    //         new TreasureShape(0, 2),
-    //         new TreasureShape(1, 3),
-    //         new TreasureShape(2, 4),
-    //         new TreasureShape(3, 4),
-    //         new TreasureShape(4, 4),
-    //         new TreasureShape(5, 1),
-    //         new TreasureShape(6, 2)
-    //     },
-    //     {
-    //         new TreasureShape(0, 2),
-    //         new TreasureShape(1, 3),
-    //         new TreasureShape(2, 4),
-    //         new TreasureShape(3, 4),
-    //         new TreasureShape(4, 4),
-    //         new TreasureShape(5, 1),
-    //         new TreasureShape(6, 2)
-    //     },
-    // };
+    public GameMap () {
+        treasureCoords = new ArrayList<int[]>();
+        makeRandomMap();
+    }
 
-    public Position[][] generateMap () {
-        //TODO: Gör unika
-        // lite okonventionell men tror det blir bäst så här
-        Position[][][] gameMaps = 
-        {
-            {
-                {new Neutral(), new Neutral(), new Neutral(), new Trap(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Surprise(), new Neutral()},
-                {new Treasure(0), new Treasure(0), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral()},
-                {new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Treasure(1), new Neutral(), new Treasure(2), new Neutral()},
-                {new Surprise(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Treasure(1), new Neutral(), new Treasure(2), new Treasure(2)},
-                {new Neutral(), new Treasure(3), new Treasure(3), new Treasure(3), new Neutral(), new Neutral(), new Treasure(1), new Neutral(), new Trap(), new Treasure(2)},
-                {new Neutral(), new Neutral(), new Treasure(3), new Trap(), new Neutral(), new Neutral(), new Surprise(), new Neutral(), new Neutral(), new Neutral()},
-                {new Neutral(), new Neutral(), new Neutral(),new Neutral(), new Neutral(), new Neutral(),new Neutral(), new Neutral(), new Treasure(4), new Treasure(4)},
-                {new Neutral(), new Neutral(), new Neutral(),new Neutral(), new Neutral(), new Neutral(),new Neutral(), new Neutral(), new Treasure(4), new Treasure(4)},
-                {new Treasure(6), new Neutral(), new Neutral(), new Neutral(), new Trap(), new Neutral(), new Neutral(), new Treasure(5), new Neutral(), new Neutral()},
-                {new Treasure(6), new Neutral(), new Surprise(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral()}
-            },
-            {
-                {new Neutral(), new Neutral(), new Neutral(), new Trap(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Surprise(), new Neutral()},
-                {new Treasure(0), new Treasure(0), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral()},
-                {new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Treasure(1), new Neutral(), new Treasure(2), new Neutral()},
-                {new Surprise(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Treasure(1), new Neutral(), new Treasure(2), new Treasure(2)},
-                {new Neutral(), new Treasure(3), new Treasure(3), new Treasure(3), new Neutral(), new Neutral(), new Treasure(1), new Neutral(), new Trap(), new Treasure(2)},
-                {new Neutral(), new Neutral(), new Treasure(3), new Trap(), new Neutral(), new Neutral(), new Surprise(), new Neutral(), new Neutral(), new Neutral()},
-                {new Neutral(), new Neutral(), new Neutral(),new Neutral(), new Neutral(), new Neutral(),new Neutral(), new Neutral(), new Treasure(4), new Treasure(4)},
-                {new Neutral(), new Neutral(), new Neutral(),new Neutral(), new Neutral(), new Neutral(),new Neutral(), new Neutral(), new Treasure(4), new Treasure(4)},
-                {new Treasure(6), new Neutral(), new Neutral(), new Neutral(), new Trap(), new Neutral(), new Neutral(), new Treasure(5), new Neutral(), new Neutral()},
-                {new Treasure(6), new Neutral(), new Surprise(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral(), new Neutral()}
-            }
-        };
-
-        return gameMaps[randomInt];
-    };
-
-    public void makeRandomMap () {
+    private void makeRandomMap () {
         //hitta random ställe att fylla ut
         for (int i = 0; i < treasureAmount; i++) {
             int randomX; int randomY;
@@ -172,33 +118,9 @@ public class GameMap {
         }
     }
 
-    public int[] getFreeCoords () {
-        int randomX; int randomY;
-        do {
-            randomX = new Random().nextInt(x); randomY = new Random().nextInt(y);
-        } while(map[randomX][randomY].getDigStatus());
-
-        return new int[]{randomX, randomY};
-    }
-
-    public TreasureShape[] getTreasureShapes () {
-        return treasureShapes;
-    }
-
-    public Position[][] getMap () {
-        return map;
-    }
-
-    public int getYMax () {
-        return y;
-    }
-    public int getXMax () {
-        return x;
-    }
-    public int getTreasureAmount() {
-        return treasureAmount;
-    }
-    public ArrayList <int[]> getTreasureCoords() {
-        return treasureCoords;
-    }
+    public TreasureShape[] getTreasureShapes () {return treasureShapes;}
+    public Position[][] getMap () {return map;}
+    public int getYMax () {return y;}
+    public int getXMax () {return x;}
+    public ArrayList <int[]> getTreasureCoords() {return treasureCoords;}
 }

@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 
-public class EventView implements MessageViewsInterface {
+public class EventView {
     private MainView mainView;
     private JTextArea guiEventText;
     public EventView(MainView mainView){

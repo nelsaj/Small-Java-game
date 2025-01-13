@@ -10,25 +10,14 @@ public class Player {
         setPlayerNbr(playerNbr); 
     }
 
-    public void setLives(int lives) {
-        this.lives = lives;
-    }
-    public int getLives() {
-        return lives;
-    }
-    //PRIVATE
-    private void setScore(int score) {
-        this.score = score;
-    }
-    public int getScore() {
-        return score;
-    }
-    public void setPlayerNbr(int playerNbr) {
-        this.playerNbr = playerNbr;
-    }
-    public int getPlayerNbr() {
-        return playerNbr;
-    }
+    public void setLives(int lives) {this.lives = lives;}
+    public int getLives() {return lives;}
+
+    public void setScore(int score) {this.score = score;}
+    public int getScore() {return score;}
+
+    public void setPlayerNbr(int playerNbr) {this.playerNbr = playerNbr;}
+    public int getPlayerNbr() {return playerNbr;}
 
     public void addPoints (int points) {
         setScore(score+points);
@@ -36,7 +25,6 @@ public class Player {
     public void addLives (int lives) {
         setLives(this.lives+lives);
     }
-
     public void removePoints (int points) {
         if (points > this.score) setScore(0);
         else setScore(this.score - points);

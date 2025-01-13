@@ -19,7 +19,7 @@ public class GameMapView {
     public GameMapView(MainView mainView){
         this.mainView = mainView;
         // createGameMapGUI(10,10);
-        NEWcreateGameMapGUI();
+        createGameMapGUI();
     }
     
     //Sparar denna ifallatt
@@ -56,16 +56,20 @@ public class GameMapView {
 
     public void changeButton (int[] pos, String letter) {
         // funkar inte på mac :( vvv
-        buttonGrid[pos[0]][pos[1]].setBackground(new Color(123)); // test color
+        //buttonGrid[pos[0]][pos[1]].setBackground(new Color(123)); // test color
         buttonGrid[pos[0]][pos[1]].setEnabled(false);
 
         buttonGrid[pos[0]][pos[1]].setText(letter);
         if(letter == "S"){
             buttonGrid[pos[0]][pos[1]].setBackground(Color.yellow); // test color
+        } else if(letter == "F") {
+            buttonGrid[pos[0]][pos[1]].setBackground(Color.red); // test color
+        } else if (letter == "Ö") {
+            buttonGrid[pos[0]][pos[1]].setBackground(Color.blue); // test color
         }
     }
     
-    public void NEWcreateGameMapGUI(){
+    public void createGameMapGUI(){
         JPanel gameMapGUI = new JPanel(new GridLayout(rows, colums));
         gameMapGUI.setBounds(50, 80, 450, 450);
         for (int i = 0; i < rows; i++) {
