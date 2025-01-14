@@ -35,7 +35,6 @@ public class MainController {
 
     public void buttonPressed (int[] pos) {
         Position gameSpace = gameMap[pos[0]][pos[1]];
-        //FIXA MER HÄR
         view.changeButton(pos, gameMap[pos[0]][pos[1]].getColor());
         gameSpace.digEvent();
         boolean changeTurn = gameMapController.digEvent(gameSpace, currentTurn, getOpponentPlayer());

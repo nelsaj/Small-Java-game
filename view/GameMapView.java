@@ -24,11 +24,8 @@ public class GameMapView {
   
 
     public void changeButton (int[] pos, String color) {
-        // funkar inte på mac :( vvv
-        //buttonGrid[pos[0]][pos[1]].setBackground(new Color(123)); // test color
+        
         buttonGrid[pos[0]][pos[1]].setEnabled(false);
-
-        //buttonGrid[pos[0]][pos[1]].setText(letter);
         buttonGrid[pos[0]][pos[1]].setBackground(Color.decode("#"+color));
     }
     
@@ -47,7 +44,6 @@ public class GameMapView {
                         int row = Integer.parseInt(e.getActionCommand().split(",")[0]);
                         int colum = Integer.parseInt(e.getActionCommand().split(",")[1]);
                         
-                        //testing
                         mainView.buttonPressed(new int[]{row, colum});
                     }
                     
