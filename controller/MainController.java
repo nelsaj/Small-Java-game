@@ -30,7 +30,7 @@ public class MainController {
     /**
      * Skapar en ny instans av MainController och initialiserar spelet.
      * 
-     * @author Nelly Sajland
+     * @author Nelly Sajland, Elliot Collins
      */
     public MainController() {
         view = new MainView(1000, 600, this);

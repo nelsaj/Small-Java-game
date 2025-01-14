@@ -16,7 +16,7 @@ import view.MainView;
 /**
  * Kontrollerar spelplanen och hanterar spelhändelser.
  * 
- * @author Nelly Sajland
+ * @author Nelly Sajland, Elliot Collins
  */
 public class GameMapController {
     private MainView mainView;
@@ -30,7 +30,7 @@ public class GameMapController {
      *
      * @param mainView huvudvyn som uppdateras med händelser
      * 
-     * @author Nelly Sajland
+     * @author Nelly Sajland, Elliot Collins
      */
     public GameMapController(MainView mainView) {
         this.gameMap = new GameMap();
@@ -70,7 +70,7 @@ public class GameMapController {
      * @param opponentPlayer motspelaren
      * @return true om inga extra drag återstår, annars false
      * 
-     * @author Nelly Sajland
+     * @author Nelly Sajland, Elliot Collins
      */
     public boolean digEvent(Position gameSpace, Player currentPlayer, Player opponentPlayer) {
         if (extraTurns > 0) extraTurns--;
@@ -96,7 +96,7 @@ public class GameMapController {
      * @param gameSpace positionen som grävdes
      * @param player nuvarande spelare
      * 
-     * @author Nelly Sajland
+     * @author Nelly Sajland, Elliot Collins
      */
     public void treasureCheck(Position gameSpace, Player player) {
         TreasureShape[] treasureShapes = gameMap.getTreasureShapes();
@@ -123,7 +123,7 @@ public class GameMapController {
      * @param currentPlayer nuvarande spelare
      * @param opponentPlayer motspelaren
      * 
-     * @author Nelly Sajland
+     * @author Nelly Sajland, Elliot Collins
      */
     public void activateTrap(Player currentPlayer, Player opponentPlayer) {
         int randomIndex = new Random().nextInt(3);
@@ -161,7 +161,7 @@ public class GameMapController {
      * @param currPlayer nuvarande spelare
      * @param oppPlayer motspelaren
      * 
-     * @author Nelly Sajland
+     * @author Nelly Sajland, Elliot Collins
      */
     public void activateSurprise(Player currPlayer, Player oppPlayer) {
         int randomIndex = new Random().nextInt(4);
