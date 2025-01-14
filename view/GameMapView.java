@@ -54,19 +54,13 @@ public class GameMapView {
     //     mainView.getWindowDrawSpace().add(gameMapGUI);
     // }
 
-    public void changeButton (int[] pos, String letter) {
+    public void changeButton (int[] pos, String color) {
         // funkar inte på mac :( vvv
         //buttonGrid[pos[0]][pos[1]].setBackground(new Color(123)); // test color
         buttonGrid[pos[0]][pos[1]].setEnabled(false);
 
-        buttonGrid[pos[0]][pos[1]].setText(letter);
-        if(letter == "S"){
-            buttonGrid[pos[0]][pos[1]].setBackground(Color.yellow); // test color
-        } else if(letter == "F") {
-            buttonGrid[pos[0]][pos[1]].setBackground(Color.red); // test color
-        } else if (letter == "Ö") {
-            buttonGrid[pos[0]][pos[1]].setBackground(Color.blue); // test color
-        }
+        //buttonGrid[pos[0]][pos[1]].setText(letter);
+        buttonGrid[pos[0]][pos[1]].setBackground(Color.decode("#"+color));
     }
     
     public void createGameMapGUI(){

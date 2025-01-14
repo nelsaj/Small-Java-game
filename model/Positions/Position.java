@@ -7,4 +7,5 @@ public abstract class Position {
 
     public void digEvent() {hasBeenDigged = true;}
     public boolean getDigStatus() {return hasBeenDigged;}
+    public abstract String getColor();
 }

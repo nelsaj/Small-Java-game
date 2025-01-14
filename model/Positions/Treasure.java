@@ -18,4 +18,6 @@ public class Treasure extends Position {
     public String toString() {
         return "S";
     }
+
+    public String getColor() {return "ffcd00";}
 }

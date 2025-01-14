@@ -6,4 +6,6 @@ public class Neutral extends Position {
     public String toString() {
         return "";
     }
+
+    public String getColor() {return "FFFFFF";}
 }
