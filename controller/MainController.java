@@ -42,7 +42,6 @@ public class MainController {
 
         checkIfGameDone();
         
-        //change turn
         if(changeTurn) {
             if(currentTurn.equals(player1)) currentTurn = player2;
             else currentTurn = player1;
