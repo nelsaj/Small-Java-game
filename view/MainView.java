@@ -58,7 +58,6 @@ public class MainView extends JFrame {
     public void buttonPressed (int[] pos) {
         controller.buttonPressed(pos);
     }
-    //letter temporary
     public void changeButton (int[] pos, String color) {
         gameMapView.changeButton(pos, color);
     }
