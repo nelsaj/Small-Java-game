@@ -6,4 +6,6 @@ public class Surprise extends Position {
     public String toString() {
         return "Ö";
     }
+
+    public String getColor() {return "006cff";}
 }

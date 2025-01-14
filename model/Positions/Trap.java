@@ -7,4 +7,6 @@ public class Trap extends Position {
     public String toString() {
         return "F";
     }
+
+    public String getColor() {return "ff3200";}
 }

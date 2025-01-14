@@ -59,8 +59,8 @@ public class MainView extends JFrame {
         controller.buttonPressed(pos);
     }
     //letter temporary
-    public void changeButton (int[] pos, String letter) {
-        gameMapView.changeButton(pos, letter);
+    public void changeButton (int[] pos, String color) {
+        gameMapView.changeButton(pos, color);
     }
     public void changePoints(int whichPlayer, String newPoints){
         playerView.changePointGUI(whichPlayer, newPoints);
