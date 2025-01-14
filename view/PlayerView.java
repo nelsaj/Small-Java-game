@@ -1,3 +1,10 @@
+
+/**
+ * PlayerView is the class representing the PlayerView and its diffrent
+ * states such as the incrementaion and decrementation 
+ * of lives.
+ * @author Elliot
+*/
 package view;
 
 import java.awt.Font;
@@ -14,7 +21,12 @@ public class PlayerView {
     private JLabel player2PointsGUI;
     private JLabel player1LifesGUI;
     private JLabel player2LifesGUI;
-
+    
+    /**
+     * This constructor inits the GUI part of the playerView
+     * @param mainView
+     * @author Elliot
+    */
     public PlayerView(MainView mainView){
         this.mainView = mainView;
         createPlayerNamesGUI("Player1", "Player2");
@@ -22,6 +34,12 @@ public class PlayerView {
         CreateLifesGUI("3", "3");
     }
 
+    /**
+     * createPlayerNamesGUI inits the GUI part of actual player names
+     * @param player1Name
+     * @param player2Name
+     * @author Elliot
+    */
     public void createPlayerNamesGUI(String player1Name, String player2Name){
         player1NameGUI = new JLabel(player1Name);
         player2NameGUI = new JLabel(player2Name);
@@ -33,6 +51,13 @@ public class PlayerView {
         mainView.getWindowDrawSpace().add(player1NameGUI);
         mainView.getWindowDrawSpace().add(player2NameGUI);
     }
+    
+    /**
+     * createPlayerPointsCounterGUI inits the GUI part of the points system 
+     * @param player1Points
+     * @param player2Points
+     * @author Elliot
+    */
     public void createPlayerPointsCounterGUI(String player1Points, String player2Points){
         player1PointsGUI = new JLabel(player1Points);
         player2PointsGUI = new JLabel(player2Points);
@@ -44,11 +69,23 @@ public class PlayerView {
         mainView.getWindowDrawSpace().add(player1PointsGUI);
         mainView.getWindowDrawSpace().add(player2PointsGUI);
     }
-    
+     
+    /**
+     * changePointGUI inits the GUI part of changing the gui points
+     * @param whichPlayer
+     * @param newPoints
+     * @author Elliot
+    */
     public void changePointGUI(int whichPlayer, String newPoints){
         if(whichPlayer == 1){player1PointsGUI.setText(newPoints);}
         if(whichPlayer == 2){player2PointsGUI.setText(newPoints);}
     }
+    
+     /**
+     * displayCurrTurn inits the GUI part of showing whos turn it is in the game
+     * @param currPlayer
+     * @author Elliot
+    */
     public void displayCurrTurn(int currPlayer) {
         if(currPlayer == 1) {
             player1NameGUI.setFont(new Font("serif", Font.BOLD, 18));
@@ -58,7 +95,13 @@ public class PlayerView {
             player1NameGUI.setFont(new Font("serif", Font.PLAIN, 18));
         }
     }
-
+    
+    /**
+     * CreateLifesGUI inits the GUI part of creating the lifes GUI.
+     * @param player1Lifes
+     * @param player2Lifes
+     * @author Elliot
+    */
     public void CreateLifesGUI(String player1Lifes, String player2Lifes){
         player1LifesGUI = new JLabel(player1Lifes);
         player2LifesGUI = new JLabel(player2Lifes);
@@ -84,7 +127,13 @@ public class PlayerView {
         mainView.getWindowDrawSpace().add(livesTextLabel1);
         mainView.getWindowDrawSpace().add(livesTextLabel2);
     }
-
+    
+    /**
+     * changeLifesGUI inits the GUI part of changing the gui lifes
+     * @param whichPlayer
+     * @param newLifes
+     * @author Elliot
+    */
     public void changeLifesGUI(int whichPlayer, String newLifes){
         if(whichPlayer == 1){player1LifesGUI.setText(newLifes);}
         if(whichPlayer == 2){player2LifesGUI.setText(newLifes);}

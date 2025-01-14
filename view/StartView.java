@@ -1,3 +1,8 @@
+/**
+ * StartView is the class representing the start of the application and its diffrent
+ * states such as the two choices a player can make in the GUI
+ * @author Elliot
+*/
 package view;
 
 import java.awt.event.ActionListener;
@@ -10,11 +15,19 @@ import view.GameMapView;
 public class StartView extends JFrame {
     
     private MainView mainView;
-    
+
+     /**
+     * This constructor inits the attribute mainView
+     * @param mainView
+     * @author Elliot
+    */
     public StartView(MainView mainView){
         this.mainView = mainView;
     }
-
+    /**
+     * createStartView inits the GUI part of the StartView
+     * @author Elliot
+    */
     public void createStartView(){
         JButton startBtn = new JButton("Start a new game");
         JButton highScoreBtn = new JButton("Highscore");

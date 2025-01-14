@@ -1,7 +1,6 @@
 
 /**
- * This is the constructor that init the whole GUI panel
- * @param mainView
+ * MainView is the class representing the whole window and its diffrent states
  * @author Elliot
 */
 package view;
@@ -26,7 +25,13 @@ public class MainView extends JFrame {
     private StartView startView;
     private Highscoreview highscoreview;
 
-
+    /**
+     * Construktor that inits the window and the drawing space in that window
+     * @author Elliot
+     * @param windowWidth
+     * @param windowHeight
+     * @param controller
+     */
     public MainView(int windowWidth, int windowHeight, MainController controller){      
         super("Game");
         this.setWindowWidth(windowWidth);
@@ -50,58 +55,144 @@ public class MainView extends JFrame {
         this.controller = controller;       
     }
 
+    /**
+     * createGameView inits the diffrent parts of the game view such as eventView and playerView.
+     * @author Elliot
+     */
     public void createGameView(){
         gameMapView = new GameMapView(this);
         playerView = new PlayerView(this);
         eventView = new EventView(this);
     }
+    
+     /**
+     * createHighscoreView inits the whole highscore view
+     * @author Elliot
+     */
     public void createHighscoreView(){
         highscoreview = new Highscoreview(this);
         highscoreview.createHighScoreGUI();
     }
-
+     
+    /**
+     * eventMessage is the method that changes the eventView Text that shows the player what has happend
+     * @author Elliot
+     * @param message
+     */
     public void eventMessage(String message) {eventView.showMessage(message);}
-
+    
+    /**
+     * buttonPressed is the method that inits the buttonPress functionality on the actuall gameMap
+     * @author Elliot
+     * @param pos
+     */
     public void buttonPressed (int[] pos) {
         controller.buttonPressed(pos);
     }
+       
+    /**
+     * changeButton is the method that inits the change of color when a button is press on the gameMap.
+     * @author Elliot
+     * @param pos
+     * @param color
+     */
     public void changeButton (int[] pos, String color) {
         gameMapView.changeButton(pos, color);
     }
+    /**
+     * changePoints is the method that inits the change of points when a player finds a treasure
+     * and takes in which player as a int representation and a string of new points to be added in a 
+     * integer format.
+     * 
+     * @author Elliot
+     * @param whichPlayer
+     * @param newPoints
+     */
     public void changePoints(int whichPlayer, String newPoints){
         playerView.changePointGUI(whichPlayer, newPoints);
     }
+   
+     /**
+     * buttonPressed is the method that inits the change of current player turn and takes in an
+     * integer representing one player or the other.
+     * 
+     * @author Elliot
+     * @param whichPlayer
+     * @param newPoints
+     */
     public void changeCurrTurn(int currPlayer) {
         playerView.displayCurrTurn(currPlayer);
     }
-
+    /**
+     * ClearWindow clears the window of all components
+     * @author Elliot
+    */
     public void clearWindow(){
         this.getWindowDrawSpace().removeAll();
         this.getWindowDrawSpace().revalidate();
         this.getWindowDrawSpace().repaint();
     }
+    /**
+     * setWindowWidth sets the windows width
+     * @param windowWidth
+     * @author Elliot
+    */
     public void setWindowWidth(int windowWidth) {
         this.windowWidth = windowWidth;
     }
+     /**
+     * setWindowheight sets the windows height
+     * @param windowheight
+     * @author Elliot
+    */
     public void setWindowHeight(int windowHeight) {
         this.windowHeight = windowHeight;
     }
+    /**
+     * getWindowWidth gets the windows width
+     * @author Elliot
+     * @return int
+    */
     public int getWindowWidth() {
         return windowWidth;
     }
+    /**
+     * getWindowHeight gets the windows height
+     * @author Elliot
+     * @return int
+    */
     public int getWindowHeight() {
         return windowHeight;
     }
+    /**
+     * getWindowDrawSpace gets the windows drawing context 
+     * @author Elliot
+     * @return JPanel
+    */
     public JPanel getWindowDrawSpace() {
         return windowDrawSpace;
     }
+    /**
+     * changeLifesGUI changes the lifes on the player
+     * @author Elliot
+     * @param whichPlayer
+     * @param lifeString
+    */
     public void changeLifesGUI(int whichPlayer, String lifeString){
         playerView.changeLifesGUI(whichPlayer, lifeString);
     }
+    /**
+     * disableMap disables the whole gameMap
+     * @author Elliot
+     */
     public void disableMap(){
         gameMapView.disablemap();
     }
-
+    /**
+     * popUpEnterName inits the popUpName functionality taking player names inputs
+     * @author Elliot
+     * @return String
+     */
     public String popUpEnterName(){
         return gameMapView.popUpEnterName();    
     }
