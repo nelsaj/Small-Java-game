@@ -1,3 +1,9 @@
+
+/**
+ * This is the constructor that init the whole GUI panel
+ * @param mainView
+ * @author Elliot
+*/
 package view;
 
 import javax.swing.JFrame;
@@ -19,6 +25,7 @@ public class MainView extends JFrame {
     private PlayerView playerView;
     private StartView startView;
     private Highscoreview highscoreview;
+
 
     public MainView(int windowWidth, int windowHeight, MainController controller){      
         super("Game");

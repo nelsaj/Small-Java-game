@@ -1,3 +1,8 @@
+
+/**
+ * This is klass represents the highscore GUI 
+ * @author Elliot
+*/
 package view;
 
 import java.awt.Font;
@@ -14,10 +19,19 @@ import javax.swing.JList;
 public class Highscoreview {
     private MainView mainView;
 
+    /**
+     * This is the constructor that inits the mainView attribut
+     * @param mainView
+     * @author Elliot
+    */
     public Highscoreview(MainView mainView) {
         this.mainView = mainView;
     }
-
+    
+    /**
+     * createHighScoreGUI creates a JList with the highscore lines of the Highscore.txt file that has stored winning players
+     * @author Elliot
+    */
     public void createHighScoreGUI() {
         String filePath = "./Highscore.txt";
         List<String[]> linesAsArrays = new ArrayList<>();
