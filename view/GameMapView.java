@@ -24,17 +24,16 @@ public class GameMapView {
   
 
     public void changeButton (int[] pos, String letter) {
-        // funkar inte på mac :( vvv
-        //buttonGrid[pos[0]][pos[1]].setBackground(new Color(123)); // test color
+      
         buttonGrid[pos[0]][pos[1]].setEnabled(false);
 
         buttonGrid[pos[0]][pos[1]].setText(letter);
         if(letter == "S"){
-            buttonGrid[pos[0]][pos[1]].setBackground(Color.yellow); // test color
+            buttonGrid[pos[0]][pos[1]].setBackground(Color.yellow); 
         } else if(letter == "F") {
-            buttonGrid[pos[0]][pos[1]].setBackground(Color.red); // test color
+            buttonGrid[pos[0]][pos[1]].setBackground(Color.red); 
         } else if (letter == "Ö") {
-            buttonGrid[pos[0]][pos[1]].setBackground(Color.blue); // test color
+            buttonGrid[pos[0]][pos[1]].setBackground(Color.blue); 
         }
     }
     
