@@ -144,7 +144,7 @@ public class GameMapController {
 
                 map[randomCoord[0]][randomCoord[1]].digEvent();
                 digEvent(map[randomCoord[0]][randomCoord[1]], currPlayer, oppPlayer);
-                mainView.changeButton(randomCoord, map[randomCoord[0]][randomCoord[1]].toString());
+                mainView.changeButton(randomCoord, map[randomCoord[0]][randomCoord[1]].getColor());
 
                 break;
             }
@@ -160,7 +160,7 @@ public class GameMapController {
                 
                 map[freeCoords[0]][freeCoords[1]].digEvent();
                 digEvent(map[freeCoords[0]][freeCoords[1]], currPlayer, oppPlayer);
-                mainView.changeButton(freeCoords, map[freeCoords[0]][freeCoords[1]].toString());
+                mainView.changeButton(freeCoords, map[freeCoords[0]][freeCoords[1]].getColor());
                 
                 extraMessage = "Player "+currPlayer.getPlayerNbr()+" får en slumpmässig ruta uppgrävd."+freeCoords[0]+" "+freeCoords[1];
                 break;
