@@ -21,38 +21,7 @@ public class GameMapView {
         // createGameMapGUI(10,10);
         createGameMapGUI();
     }
-    
-    //Sparar denna ifallatt
-
-    // public void createGameMapGUI( int rows, int colums){
-    //     JPanel gameMapGUI = new JPanel(new GridLayout(10, 10));
-    //     gameMapGUI.setBounds(50, 80, 450, 450);
-    //     for (int i = 0; i < rows; i++) {
-    //         for (int j = 0; j < colums; j++) {
-    //             JButton gameMapPostionBtn = new JButton();
-    //             String positionDataForBtn = i + "," + j;
-    //             gameMapPostionBtn.setActionCommand(positionDataForBtn);
-    //             gameMapPostionBtn.addActionListener(new ActionListener() {
-
-    //                 @Override
-    //                 public void actionPerformed(ActionEvent e) {
-    //                     int row = Integer.parseInt(e.getActionCommand().split(",")[0]);
-    //                     int colum = Integer.parseInt(e.getActionCommand().split(",")[1]);
-    //                     System.out.println(row + ", " + colum);
-    //                     // funkar inte på mac :( vvv
-    //                     gameMapPostionBtn.setBackground(new Color(123)); // test color
-    //                     gameMapPostionBtn.setEnabled(false);
-
-    //                     //testing
-    //                     mainView.buttonPressed(new int[]{row, colum});
-    //                 }
-                    
-    //             });
-    //             gameMapGUI.add(gameMapPostionBtn);        
-    //         }
-    //     }
-    //     mainView.getWindowDrawSpace().add(gameMapGUI);
-    // }
+  
 
     public void changeButton (int[] pos, String color) {
         // funkar inte på mac :( vvv
@@ -77,7 +46,6 @@ public class GameMapView {
                     public void actionPerformed(ActionEvent e) {
                         int row = Integer.parseInt(e.getActionCommand().split(",")[0]);
                         int colum = Integer.parseInt(e.getActionCommand().split(",")[1]);
-                        System.out.println(row + ", " + colum);
                         
                         //testing
                         mainView.buttonPressed(new int[]{row, colum});
@@ -102,4 +70,5 @@ public class GameMapView {
             }
         }
     }
+
 }

@@ -58,17 +58,4 @@ public class TreasureShape {
         if(spacesDug == size) return true;
         else return false;
     }
-
-    // TreasureShape(Treasure[][] shapeInfo) {
-    //     setShape(shapeInfo);
-    // }
-
-    // private void setShape(Treasure[][] shapeInfo) {
-
-    // }
-
-    // private Treasure[][] getShape () {
-        
-    //     return new Treasure[1][1];
-    // }
 }

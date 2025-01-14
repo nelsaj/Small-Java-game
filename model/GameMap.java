@@ -13,12 +13,12 @@ import model.Positions.TreasureShape;
 public class GameMap {
     final int x = 10; final int y = 10;
     final Position[][] map = new Position[y][x];
-    final int trapAmount = 10; final int surpriseAmount = 10;
+    final int trapAmount = 15; final int surpriseAmount = 10;
     final int[][][] allowedShapes = TreasureShape.getAllowedShapes();
     final int treasureAmount = allowedShapes.length; // (9)
 
-    TreasureShape[] treasureShapes;
-    ArrayList <int[]> treasureCoords;
+    private TreasureShape[] treasureShapes;
+    private ArrayList <int[]> treasureCoords;
 
     public GameMap () {
         treasureCoords = new ArrayList<int[]>();

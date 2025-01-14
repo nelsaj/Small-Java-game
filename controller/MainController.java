@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -24,9 +23,7 @@ public class MainController {
     private Player player1;
     private Player player2;
     private Player currentTurn;
-    //currentTurn här eller i player??
-
-    
+ 
     public MainController(){
         view = new MainView(1000,600, this);
         gameMapController = new GameMapController(view);
@@ -68,6 +65,8 @@ public class MainController {
             view.eventMessage("Player "+currentTurn.getPlayerNbr()+" har slut på liv. Player "+oppPlayer.getPlayerNbr()+" vinner med "+oppPlayer.getScore()+" poäng!!");
             view.disableMap();
             winningPlayerName = view.popUpEnterName();
+            winningPlayer = oppPlayer;
+            addPlayerToHighScorelist(winningPlayerName, Integer.toString(winningPlayer.getScore()));
         }
 
         TreasureShape[] treasureShapes = gameMapController.getMapModel().getTreasureShapes();
@@ -89,16 +88,18 @@ public class MainController {
         }
     }
 
-       public void addPlayerToHighScorelist(String name, String points) {
+    public void addPlayerToHighScorelist(String name, String points) {
         String filePath = "./Highscore.txt";
-        List<String[]> linesAsArrays = new ArrayList<>();
-    
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        ArrayList<String[]> linesAsArrays = new ArrayList<>();
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
             String line;
             while ((line = br.readLine()) != null) {
                 String[] stringLineArr = line.split(",");
                 linesAsArrays.add(stringLineArr);
             }
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(view, "Error reading the high score file.");
@@ -112,12 +113,16 @@ public class MainController {
             Integer.parseInt(b[1].trim()), 
             Integer.parseInt(a[1].trim())
         ));
-
+        
         try {
+            
             FileWriter fileWriter = new FileWriter(filePath);
-            for (String[] ele : linesAsArrays) {
-                String insertStringIntoHighscore = ele[0] + "," + ele[1] + "\n";
-                fileWriter.write(insertStringIntoHighscore);
+            for (int i = 0; i < 10; i++) {
+                if(i >= linesAsArrays.size()){
+                    break;
+                }   
+                String insertStringIntoHighscore = linesAsArrays.get(i)[0] + "," + linesAsArrays.get(i)[1] + "\n";
+                fileWriter.write(insertStringIntoHighscore);  
             }
             fileWriter.close();
         } catch (IOException e) {

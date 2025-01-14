@@ -14,12 +14,11 @@ import model.Positions.TreasureShape;
 import view.MainView;
 
 public class GameMapController {
-    MainView mainView;
-    GameMap gameMap;
-    Position[][] map;
-
-    int extraTurns;
-    String extraMessage;
+    private MainView mainView;
+    private GameMap gameMap;
+    private Position[][] map;
+    private int extraTurns;
+    private String extraMessage;
 
     GameMapController(MainView mainView) {
         this.gameMap = new GameMap();
