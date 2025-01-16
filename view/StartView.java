@@ -24,6 +24,7 @@ public class StartView extends JFrame {
     public StartView(MainView mainView){
         this.mainView = mainView;
     }
+  
     /**
      * createStartView inits the GUI part of the StartView
      * @author Elliot

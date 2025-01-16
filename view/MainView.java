@@ -5,6 +5,10 @@
 */
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -63,6 +67,19 @@ public class MainView extends JFrame {
         gameMapView = new GameMapView(this);
         playerView = new PlayerView(this);
         eventView = new EventView(this);
+        startView = new StartView(this);
+
+        JButton backButton = new JButton("Tillbaka till start meny");
+        backButton.setBounds(800, 500, 100, 50);
+        backButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                System.out.println("Start clicked");
+                clearWindow();
+                startView.createStartView();
+            }
+        });
+        this.getWindowDrawSpace().add(backButton);
     }
     
      /**
