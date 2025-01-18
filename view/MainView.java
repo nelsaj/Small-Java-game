@@ -90,6 +90,17 @@ public class MainView extends JFrame {
         highscoreview = new Highscoreview(this);
         highscoreview.createHighScoreGUI();
     }
+    /**
+     * Calls on operation in Highscoreview to update highscore list
+     * 
+     * @param name player name
+     * @param points player points
+     * 
+     * @author Elliot
+     */
+    public void addPlayerToHighScorelist(String name, String points) {
+        highscoreview.addPlayerToHighScorelist(name, points);
+    }
      
     /**
      * eventMessage is the method that changes the eventView Text that shows the player what has happend

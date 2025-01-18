@@ -91,7 +91,7 @@ public class MainController {
             view.disableMap();
             winningPlayerName = view.popUpEnterName();
             winningPlayer = oppPlayer;
-            addPlayerToHighScorelist(winningPlayerName, Integer.toString(winningPlayer.getScore()));
+            view.addPlayerToHighScorelist(winningPlayerName, Integer.toString(winningPlayer.getScore()));
         }
 
         TreasureShape[] treasureShapes = gameMapController.getMapModel().getTreasureShapes();
@@ -107,57 +107,8 @@ public class MainController {
                 view.eventMessage("Alla skatter hittade. Player " + winningPlayer.getPlayerNbr() + " vinner med " + winningPlayer.getScore() + " poäng!!");
                 view.disableMap();
                 winningPlayerName = view.popUpEnterName();
-                addPlayerToHighScorelist(winningPlayerName, Integer.toString(winningPlayer.getScore()));
+                view.addPlayerToHighScorelist(winningPlayerName, Integer.toString(winningPlayer.getScore()));
             }
-        }
-    }
-
-    /**
-     * Lägger till spelaren till highscorelistan.
-     * 
-     * @param name spelarens namn
-     * @param points spelarens poäng
-     * 
-     * @author Elliot Collins
-     */
-    public void addPlayerToHighScorelist(String name, String points) {
-        String filePath = "./Highscore.txt";
-        ArrayList<String[]> linesAsArrays = new ArrayList<>();
-
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] stringLineArr = line.split(",");
-                linesAsArrays.add(stringLineArr);
-            }
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(view, "Error reading the high score file.");
-            return;
-        }
-
-        String[] newWinningPlayer = {name, points};
-        linesAsArrays.add(newWinningPlayer);
-
-        linesAsArrays.sort((a, b) -> Integer.compare(
-                Integer.parseInt(b[1].trim()),
-                Integer.parseInt(a[1].trim())
-        ));
-
-        try {
-            FileWriter fileWriter = new FileWriter(filePath);
-            for (int i = 0; i < 10; i++) {
-                if (i >= linesAsArrays.size()) {
-                    break;
-                }
-                String insertStringIntoHighscore = linesAsArrays.get(i)[0] + "," + linesAsArrays.get(i)[1] + "\n";
-                fileWriter.write(insertStringIntoHighscore);
-            }
-            fileWriter.close();
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(view, "Something went wrong while writing the high score file.");
         }
     }
 }
