@@ -69,6 +69,24 @@ public class MainView extends JFrame {
         eventView = new EventView(this);
         startView = new StartView(this);
 
+        createBackButton();
+    }
+    
+     /**
+     * createHighscoreView inits the whole highscore view
+     * @author Elliot
+     */
+    public void createHighscoreView(){
+        highscoreview = new Highscoreview(this);
+        highscoreview.createHighScoreGUI();
+        createBackButton();
+    }
+
+    /**
+     * creates a back button that goes back to start menu
+     * @author Elliot
+     */
+    public void createBackButton() {
         JButton backButton = new JButton("Tillbaka till start meny");
         backButton.setBounds(800, 500, 100, 50);
         backButton.addActionListener(new ActionListener(){
@@ -81,15 +99,7 @@ public class MainView extends JFrame {
         });
         this.getWindowDrawSpace().add(backButton);
     }
-    
-     /**
-     * createHighscoreView inits the whole highscore view
-     * @author Elliot
-     */
-    public void createHighscoreView(){
-        highscoreview = new Highscoreview(this);
-        highscoreview.createHighScoreGUI();
-    }
+
     /**
      * Calls on operation in Highscoreview to update highscore list
      * 

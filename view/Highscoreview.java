@@ -6,6 +6,8 @@
 package view;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -67,7 +70,6 @@ public class Highscoreview {
         JLabel highscoreLabel = new JLabel("---------- Highscore ----------- ");
         highscoreLabel.setBounds(300, 50, 500, 50);
         highscoreLabel.setFont(new Font(null, 0, 30));
-
         
         highscoreList.setBounds(250, 130, 500, 300);
         mainView.getWindowDrawSpace().add(highscoreLabel);
